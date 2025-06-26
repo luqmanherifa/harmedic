@@ -29,3 +29,19 @@ def get_users():
     return jsonify({'users': [
         {'id': u.id, 'name': u.name, 'email': u.email} for u in users
     ]})
+
+@main.route('/update_user/<int:id>', methods=['PUT'])
+def update_user(id):
+    data = request.get_json()
+    user = User.query.get_or_404(id)
+    user.name = data['name']
+    user.email = data['email']
+    db.session.commit()
+    return jsonify({'message': 'User updated successfully'})
+
+@main.route('/delete_user/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.get_or_404(id)
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({'message': 'User deleted successfully'})
