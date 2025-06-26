@@ -58,3 +58,8 @@ def search_users():
     return jsonify({
         'users': [{'id': u.id, 'name': u.name, 'email': u.email} for u in users]
     })
+
+@main.route('/home')
+def home():
+    users = User.query.all()
+    return render_template('home.html', users=users)
