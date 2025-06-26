@@ -3,10 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <title>CRUD Flask</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
-  <body class="bg-gray-100 p-6">
-    <h1 class="text-2xl font-bold">CRUD Flask + jQuery + Tailwind</h1>
+  <body class="bg-gray-100 text-gray-800 p-6">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+      <h1 class="text-2xl font-bold mb-4">User Management</h1>
+
+      <form id="userForm" class="mb-6">
+        <input
+          type="text"
+          id="name"
+          placeholder="Name"
+          class="w-full mb-2 p-2 border rounded"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          class="w-full mb-2 p-2 border rounded"
+          required
+        />
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Add User
+        </button>
+      </form>
+
+      <table id="userTable" class="table-auto w-full">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data akan diisi oleh jQuery -->
+        </tbody>
+      </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
