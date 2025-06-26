@@ -5,13 +5,12 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    
-    # Config dari config.py
     app.config.from_object('config.Config')
-    
     db.init_app(app)
 
-    from .routes import main
+    # Register semua blueprint dari app.routes
+    from .routes import main, auth
     app.register_blueprint(main)
+    app.register_blueprint(auth)
 
     return app

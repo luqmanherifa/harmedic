@@ -1,18 +1,21 @@
-from flask import Blueprint, render_template
 import os
-from flask import request, jsonify
+from flask import Blueprint, render_template, request, jsonify
+from flask import session, redirect, url_for
 from app.models import User
 from app import db
 
-# Cari folder templates dari root project
+# Blueprint dengan template_folder eksplisit
 main = Blueprint(
     'main',
     __name__,
-    template_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates')
+    template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'templates'))
 )
+
 
 @main.route('/')
 def index():
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
     return render_template('index.html')
 
 @main.route('/add_user', methods=['POST'])
