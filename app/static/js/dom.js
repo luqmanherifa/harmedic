@@ -32,22 +32,30 @@ const dom = {
     const rows = users
       .map(
         (user) => `
-      <tr>
-        <td class="border px-4 py-2">${user.id}</td>
-        <td class="border px-4 py-2">${user.name}</td>
-        <td class="border px-4 py-2">${user.email}</td>
-        <td class="border px-4 py-2">
-          <button class="edit-btn bg-yellow-500 text-white px-2 py-1 rounded mr-2"
-            data-id="${user.id}" data-name="${user.name}" data-email="${user.email}">
-            Edit
-          </button>
-          <button class="delete-btn bg-red-600 text-white px-2 py-1 rounded"
-            data-id="${user.id}">
-            Delete
-          </button>
-        </td>
-      </tr>
-    `
+    <tr>
+      <td class="border px-4 py-2">${user.id}</td>
+      <td class="border px-4 py-2">${user.name}</td>
+      <td class="border px-4 py-2">${user.email}</td>
+      <td class="border px-4 py-2 space-x-1">
+        <button class="detail-btn bg-indigo-600 text-white px-2 py-1 rounded" 
+                data-id="${user.id}" 
+                data-name="${user.name}" 
+                data-email="${user.email}">
+          Detail
+        </button>
+        <button class="edit-btn bg-yellow-500 text-white px-2 py-1 rounded" 
+                data-id="${user.id}" 
+                data-name="${user.name}" 
+                data-email="${user.email}">
+          Edit
+        </button>
+        <button class="delete-btn bg-red-600 text-white px-2 py-1 rounded" 
+                data-id="${user.id}">
+          Delete
+        </button>
+      </td>
+    </tr>
+  `
       )
       .join("");
 

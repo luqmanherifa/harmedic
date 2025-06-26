@@ -43,5 +43,19 @@ $(document).ready(function () {
     }
   });
 
+  // Klik tombol Detail
+  $("#userTable").on("click", ".detail-btn", function () {
+    const btn = $(this);
+    $("#detailId").text(btn.data("id"));
+    $("#detailName").text(btn.data("name"));
+    $("#detailEmail").text(btn.data("email"));
+    $("#detailModal").removeClass("hidden").addClass("flex");
+  });
+
+  // Tutup modal
+  $("#closeModal").on("click", function () {
+    $("#detailModal").addClass("hidden").removeClass("flex");
+  });
+
   loadUsers();
 });
