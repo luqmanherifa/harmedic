@@ -12,11 +12,11 @@ main = Blueprint(
 )
 
 
-@main.route('/')
-def index():
+@main.route('/dashboard')
+def dashboard():
     if 'user' not in session:
         return redirect(url_for('auth.login'))
-    return render_template('index.html')
+    return render_template('dashboard.html')
 
 @main.route('/add_user', methods=['POST'])
 def add_user():
@@ -59,13 +59,13 @@ def search_users():
         'users': [{'id': u.id, 'name': u.name, 'email': u.email} for u in users]
     })
 
-@main.route('/home')
+@main.route('/')
 def home():
     users = User.query.all()
     return render_template('home.html', users=users)
 
 
-@main.route('/home/<int:id>')
+@main.route('/user/<int:id>')
 def user_detail(id):
     user = User.query.get_or_404(id)
     return render_template('user_detail.html', user=user)

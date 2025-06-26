@@ -16,13 +16,17 @@ VALID_USER = {
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'user' in session:
+        # Sudah login, redirect ke dashboard
+        return redirect(url_for('main.dashboard'))
+
     error = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         if username == VALID_USER['username'] and password == VALID_USER['password']:
             session['user'] = username
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.dashboard'))
         else:
             error = 'Invalid credentials'
     return render_template('login.html', error=error)
