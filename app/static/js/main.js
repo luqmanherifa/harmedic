@@ -92,4 +92,14 @@ $(document).ready(function () {
   });
 
   loadUsers();
+
+  // Event input untuk search
+  $("#searchInput").on("input", function () {
+    const query = $(this).val().trim();
+    if (query.length > 0) {
+      api.searchUsers(query).then((data) => dom.renderTable(data.users));
+    } else {
+      loadUsers(); // kalau kosong, load semua user
+    }
+  });
 });

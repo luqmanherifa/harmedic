@@ -24,4 +24,6 @@ const api = {
       url: `/delete_user/${id}`,
       type: "DELETE",
     }),
+
+  searchUsers: (query) => $.get("/search_users", { q: query }),
 };

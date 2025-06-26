@@ -45,3 +45,13 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return jsonify({'message': 'User deleted successfully'})
+
+@main.route('/search_users')
+def search_users():
+    query = request.args.get('q', '', type=str)
+    users = User.query.filter(
+        (User.name.ilike(f"%{query}%")) | (User.email.ilike(f"%{query}%"))
+    ).all()
+    return jsonify({
+        'users': [{'id': u.id, 'name': u.name, 'email': u.email} for u in users]
+    })
