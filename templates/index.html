@@ -7,31 +7,18 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body class="bg-gray-100 text-gray-800 p-6">
-    <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
       <h1 class="text-2xl font-bold mb-4">User Management</h1>
 
-      <form id="userForm" class="mb-6">
-        <input
-          type="text"
-          id="name"
-          placeholder="Name"
-          class="w-full mb-2 p-2 border rounded"
-          required
-        />
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          class="w-full mb-2 p-2 border rounded"
-          required
-        />
+      <!-- Tombol Add User -->
+      <div class="mb-4 text-right">
         <button
-          type="submit"
+          id="openAddModal"
           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Add User
         </button>
-      </form>
+      </div>
 
       <table id="userTable" class="table-auto w-full">
         <thead>
@@ -66,6 +53,47 @@
             Close
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal Add/Edit User -->
+    <div
+      id="formModal"
+      class="fixed inset-0 bg-black bg-opacity-40 hidden justify-center items-center z-50 transition-all duration-300"
+    >
+      <div class="bg-white p-6 rounded shadow-md w-96">
+        <h2 class="text-xl font-bold mb-4" id="formModalTitle">Add User</h2>
+        <form id="userForm">
+          <input
+            type="text"
+            id="name"
+            placeholder="Name"
+            class="w-full mb-2 p-2 border rounded"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            class="w-full mb-2 p-2 border rounded"
+            required
+          />
+          <div class="flex justify-end space-x-2">
+            <button
+              type="button"
+              id="cancelForm"
+              class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 

@@ -3,6 +3,27 @@ $(document).ready(function () {
     api.getUsers().then((data) => dom.renderTable(data.users));
   }
 
+  // Tombol "Add User" diklik
+  $("#openAddModal").on("click", function () {
+    dom.resetForm();
+    $("#formModalTitle").text("Add User");
+    $("#userForm button[type='submit']")
+      .text("Save")
+      .removeClass()
+      .addClass("bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700");
+    $("#cancelForm")
+      .text("Cancel")
+      .removeClass()
+      .addClass("bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600");
+    $("#formModal").removeClass("hidden").addClass("flex");
+  });
+
+  // Cancel di dalam modal
+  $("#cancelForm").on("click", function () {
+    $("#formModal").addClass("hidden").removeClass("flex");
+  });
+
+  // Submit form Add/Edit user
   $("#userForm").on("submit", function (e) {
     e.preventDefault();
     const data = dom.getFormData();
@@ -14,6 +35,7 @@ $(document).ready(function () {
     action
       .then(() => {
         dom.resetForm();
+        $("#formModal").addClass("hidden").removeClass("flex");
         loadUsers();
       })
       .catch(() => {
@@ -24,6 +46,7 @@ $(document).ready(function () {
       });
   });
 
+  // Klik tombol Edit
   $("#userTable").on("click", ".edit-btn", function () {
     const btn = $(this);
     dom.fillForm({
@@ -31,8 +54,19 @@ $(document).ready(function () {
       name: btn.data("name"),
       email: btn.data("email"),
     });
+    $("#formModalTitle").text("Edit User");
+    $("#userForm button[type='submit']")
+      .text("Update")
+      .removeClass()
+      .addClass("bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700");
+    $("#cancelForm")
+      .text("Cancel")
+      .removeClass()
+      .addClass("bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600");
+    $("#formModal").removeClass("hidden").addClass("flex");
   });
 
+  // Klik tombol Delete
   $("#userTable").on("click", ".delete-btn", function () {
     const id = $(this).data("id");
     if (confirm("Yakin ingin menghapus user ini?")) {
@@ -52,7 +86,7 @@ $(document).ready(function () {
     $("#detailModal").removeClass("hidden").addClass("flex");
   });
 
-  // Tutup modal
+  // Tutup modal detail
   $("#closeModal").on("click", function () {
     $("#detailModal").addClass("hidden").removeClass("flex");
   });
