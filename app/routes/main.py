@@ -63,3 +63,9 @@ def search_users():
 def home():
     users = User.query.all()
     return render_template('home.html', users=users)
+
+
+@main.route('/home/<int:id>')
+def user_detail(id):
+    user = User.query.get_or_404(id)
+    return render_template('user_detail.html', user=user)

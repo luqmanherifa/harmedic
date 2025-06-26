@@ -11,10 +11,14 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {% for user in users %}
-        <div class="bg-white shadow-md rounded-lg p-4 border">
-          <h2 class="text-lg font-semibold">{{ user.name }}</h2>
-          <p class="text-sm text-gray-600">{{ user.email }}</p>
-        </div>
+        <a href="{{ url_for('main.user_detail', id=user.id) }}" class="block">
+          <div
+            class="bg-white shadow-md rounded-lg p-4 border hover:shadow-lg transition"
+          >
+            <h2 class="text-lg font-semibold">{{ user.name }}</h2>
+            <p class="text-sm text-gray-600">{{ user.email }}</p>
+          </div>
+        </a>
         {% endfor %}
       </div>
     </div>
