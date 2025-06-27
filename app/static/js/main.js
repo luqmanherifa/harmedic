@@ -1,13 +1,13 @@
 $(document).ready(function () {
-  function loadUsers() {
-    api.getUsers().then((data) => dom.renderTable(data.users));
+  function loadPosts() {
+    api.getPosts().then((data) => dom.renderTable(data.posts));
   }
 
-  // Tombol "Add User" diklik
+  // Tombol "Add Post" diklik
   $("#openAddModal").on("click", function () {
     dom.resetForm();
-    $("#formModalTitle").text("Add User");
-    $("#userForm button[type='submit']")
+    $("#formModalTitle").text("Add Post");
+    $("#postForm button[type='submit']")
       .text("Save")
       .removeClass()
       .addClass("bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700");
@@ -23,39 +23,39 @@ $(document).ready(function () {
     $("#formModal").addClass("hidden").removeClass("flex");
   });
 
-  // Submit form Add/Edit user
-  $("#userForm").on("submit", function (e) {
+  // Submit form Add/Edit post
+  $("#postForm").on("submit", function (e) {
     e.preventDefault();
     const data = dom.getFormData();
 
-    const action = dom.editingUserId
-      ? api.updateUser(dom.editingUserId, data)
-      : api.addUser(data);
+    const action = dom.editingPostId
+      ? api.updatePost(dom.editingPostId, data)
+      : api.addPost(data);
 
     action
       .then(() => {
         dom.resetForm();
         $("#formModal").addClass("hidden").removeClass("flex");
-        loadUsers();
+        loadPosts();
       })
       .catch(() => {
-        const msg = dom.editingUserId
-          ? "Gagal mengupdate user."
-          : "Gagal menambahkan user.";
+        const msg = dom.editingPostId
+          ? "Gagal mengupdate post."
+          : "Gagal menambahkan post.";
         alert(msg);
       });
   });
 
   // Klik tombol Edit
-  $("#userTable").on("click", ".edit-btn", function () {
+  $("#postTable").on("click", ".edit-btn", function () {
     const btn = $(this);
     dom.fillForm({
       id: btn.data("id"),
-      name: btn.data("name"),
-      email: btn.data("email"),
+      title: btn.data("title"),
+      content: btn.data("content"),
     });
-    $("#formModalTitle").text("Edit User");
-    $("#userForm button[type='submit']")
+    $("#formModalTitle").text("Edit Post");
+    $("#postForm button[type='submit']")
       .text("Update")
       .removeClass()
       .addClass("bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700");
@@ -67,22 +67,22 @@ $(document).ready(function () {
   });
 
   // Klik tombol Delete
-  $("#userTable").on("click", ".delete-btn", function () {
+  $("#postTable").on("click", ".delete-btn", function () {
     const id = $(this).data("id");
-    if (confirm("Yakin ingin menghapus user ini?")) {
+    if (confirm("Yakin ingin menghapus post ini?")) {
       api
-        .deleteUser(id)
-        .then(() => loadUsers())
-        .catch(() => alert("Gagal menghapus user."));
+        .deletePost(id)
+        .then(() => loadPosts())
+        .catch(() => alert("Gagal menghapus post."));
     }
   });
 
   // Klik tombol Detail
-  $("#userTable").on("click", ".detail-btn", function () {
+  $("#postTable").on("click", ".detail-btn", function () {
     const btn = $(this);
     $("#detailId").text(btn.data("id"));
-    $("#detailName").text(btn.data("name"));
-    $("#detailEmail").text(btn.data("email"));
+    $("#detailTitle").text(btn.data("title"));
+    $("#detailContent").text(btn.data("content"));
     $("#detailModal").removeClass("hidden").addClass("flex");
   });
 
@@ -91,15 +91,15 @@ $(document).ready(function () {
     $("#detailModal").addClass("hidden").removeClass("flex");
   });
 
-  loadUsers();
+  loadPosts();
 
   // Event input untuk search
   $("#searchInput").on("input", function () {
     const query = $(this).val().trim();
     if (query.length > 0) {
-      api.searchUsers(query).then((data) => dom.renderTable(data.users));
+      api.searchPosts(query).then((data) => dom.renderTable(data.posts));
     } else {
-      loadUsers(); // kalau kosong, load semua user
+      loadPosts(); // kalau kosong, load semua post
     }
   });
 });

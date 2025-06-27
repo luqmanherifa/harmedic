@@ -1,29 +1,29 @@
 const api = {
-  getUsers: () => $.get("/get_users"),
+  getPosts: () => $.get("/get_posts"),
 
-  addUser: (data) =>
+  addPost: (data) =>
     $.ajax({
-      url: "/add_user",
+      url: "/add_post",
       type: "POST",
       contentType: "application/json",
       processData: false,
       data: JSON.stringify(data),
     }),
 
-  updateUser: (id, data) =>
+  updatePost: (id, data) =>
     $.ajax({
-      url: `/update_user/${id}`,
+      url: `/update_post/${id}`,
       type: "PUT",
       contentType: "application/json",
       processData: false,
       data: JSON.stringify(data),
     }),
 
-  deleteUser: (id) =>
+  deletePost: (id) =>
     $.ajax({
-      url: `/delete_user/${id}`,
+      url: `/delete_post/${id}`,
       type: "DELETE",
     }),
 
-  searchUsers: (query) => $.get("/search_users", { q: query }),
+  searchPosts: (query) => $.get("/search_posts", { q: query }),
 };
