@@ -8,7 +8,14 @@
   </head>
   <body class="bg-gray-100 text-gray-800 p-6">
     <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
-      <div class="flex justify-end mb-4">
+      <!-- Navbar -->
+      <div class="flex justify-between items-center mb-4">
+        <a
+          href="{{ url_for('main.home') }}"
+          class="text-blue-600 hover:underline"
+        >
+          Home
+        </a>
         <a
           href="{{ url_for('auth.logout') }}"
           class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
@@ -17,15 +24,15 @@
         </a>
       </div>
 
-      <h1 class="text-2xl font-bold mb-4">User Management</h1>
+      <h1 class="text-2xl font-bold mb-4">Post Management</h1>
 
-      <!-- Tombol Add User -->
+      <!-- Tombol Add Post -->
       <div class="mb-4 text-right">
         <button
           id="openAddModal"
           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          Add User
+          Add Post
         </button>
       </div>
 
@@ -34,17 +41,17 @@
         <input
           type="text"
           id="searchInput"
-          placeholder="Search by name or email..."
+          placeholder="Search by title or content..."
           class="w-full p-2 border rounded"
         />
       </div>
 
-      <table id="userTable" class="table-auto w-full">
+      <table id="postTable" class="table-auto w-full">
         <thead>
           <tr class="bg-gray-200">
             <th class="px-4 py-2">ID</th>
-            <th class="px-4 py-2">Name</th>
-            <th class="px-4 py-2">Email</th>
+            <th class="px-4 py-2">Title</th>
+            <th class="px-4 py-2">Content</th>
             <th class="px-4 py-2">Aksi</th>
           </tr>
         </thead>
@@ -60,10 +67,10 @@
       class="fixed inset-0 bg-black bg-opacity-40 hidden justify-center items-center z-50 transition-all duration-300"
     >
       <div class="bg-white p-6 rounded shadow-md w-96">
-        <h2 class="text-xl font-bold mb-4">Detail User</h2>
+        <h2 class="text-xl font-bold mb-4">Detail Post</h2>
         <p><strong>ID:</strong> <span id="detailId"></span></p>
-        <p><strong>Name:</strong> <span id="detailName"></span></p>
-        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+        <p><strong>Title:</strong> <span id="detailTitle"></span></p>
+        <p><strong>Content:</strong> <span id="detailContent"></span></p>
         <div class="text-right mt-4">
           <button
             id="closeModal"
@@ -75,25 +82,25 @@
       </div>
     </div>
 
-    <!-- Modal Add/Edit User -->
+    <!-- Modal Add/Edit Post -->
     <div
       id="formModal"
       class="fixed inset-0 bg-black bg-opacity-40 hidden justify-center items-center z-50 transition-all duration-300"
     >
       <div class="bg-white p-6 rounded shadow-md w-96">
-        <h2 class="text-xl font-bold mb-4" id="formModalTitle">Add User</h2>
-        <form id="userForm">
+        <h2 class="text-xl font-bold mb-4" id="formModalTitle">Add Post</h2>
+        <form id="postForm">
           <input
             type="text"
-            id="name"
-            placeholder="Name"
+            id="title"
+            placeholder="Title"
             class="w-full mb-2 p-2 border rounded"
             required
           />
           <input
-            type="email"
-            id="email"
-            placeholder="Email"
+            type="content"
+            id="content"
+            placeholder="Content"
             class="w-full mb-2 p-2 border rounded"
             required
           />

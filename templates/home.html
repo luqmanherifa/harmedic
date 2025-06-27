@@ -2,21 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Home - User Cards</title>
+    <title>Home - Post Cards</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-100 text-gray-800 p-6">
+    <!-- Navbar -->
+    <div class="flex justify-end mb-6 space-x-4">
+      {% if session.get('user') %}
+      <a
+        href="{{ url_for('main.dashboard') }}"
+        class="text-blue-600 hover:underline"
+        >Dashboard</a
+      >
+      <a
+        href="{{ url_for('auth.logout') }}"
+        class="text-red-600 hover:underline"
+        >Logout</a
+      >
+      {% else %}
+      <a
+        href="{{ url_for('auth.login') }}"
+        class="text-blue-600 hover:underline"
+        >Login</a
+      >
+      {% endif %}
+    </div>
+
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-3xl font-bold mb-6 text-center">User Cards</h1>
+      <h1 class="text-3xl font-bold mb-6 text-center">Post Cards</h1>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {% for user in users %}
-        <a href="{{ url_for('main.user_detail', id=user.id) }}" class="block">
+        {% for post in posts %}
+        <a href="{{ url_for('main.post_detail', id=post.id) }}" class="block">
           <div
             class="bg-white shadow-md rounded-lg p-4 border hover:shadow-lg transition"
           >
-            <h2 class="text-lg font-semibold">{{ user.name }}</h2>
-            <p class="text-sm text-gray-600">{{ user.email }}</p>
+            <h2 class="text-lg font-semibold">{{ post.title }}</h2>
+            <p class="text-sm text-gray-600">{{ post.content }}</p>
           </div>
         </a>
         {% endfor %}
