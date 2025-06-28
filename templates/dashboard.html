@@ -199,6 +199,9 @@
                 <th scope="col" class="px-6 py-3">ID</th>
                 <th scope="col" class="px-6 py-3">TITLE</th>
                 <th scope="col" class="px-6 py-3">CONTENT</th>
+                <th scope="col" class="px-6 py-3">STATUS</th>
+                <th scope="col" class="px-6 py-3">VIEWS</th>
+                <th scope="col" class="px-6 py-3">DATE</th>
                 <th scope="col" class="px-0 py-3" colspan="3">ACTION</th>
               </tr>
             </thead>
@@ -232,6 +235,10 @@
             <p><strong>ID:</strong> <span id="detailId"></span></p>
             <p><strong>Title:</strong> <span id="detailTitle"></span></p>
             <p><strong>Content:</strong> <span id="detailContent"></span></p>
+            <p><strong>Status:</strong> <span id="detailStatus"></span></p>
+            <p><strong>Views:</strong> <span id="detailViews"></span></p>
+            <p><strong>Date:</strong> <span id="detailCreatedAt"></span></p>
+
             <div class="text-right pt-4">
               <button
                 type="button"
@@ -248,7 +255,6 @@
     </div>
 
     <!-- Modal Add/Edit Post -->
-    <!-- Main Modal -->
     <div
       id="formModal"
       tabindex="-1"
@@ -262,11 +268,14 @@
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b border-gray-300 rounded-t"
           >
-            <h3 class="text-lg font-semibold text-gray-900">Add Post</h3>
+            <h3 class="text-lg font-semibold text-gray-900" id="formModalTitle">
+              Add Post
+            </h3>
           </div>
 
           <!-- Modal body -->
           <form class="p-4 md:p-5" id="postForm">
+            <!-- Title -->
             <div class="mb-4">
               <label
                 for="title"
@@ -281,6 +290,8 @@
                 required
               />
             </div>
+
+            <!-- Content -->
             <div class="mb-4">
               <label
                 for="content"
@@ -295,6 +306,44 @@
                 required
               ></textarea>
             </div>
+
+            <!-- Status -->
+            <div class="mb-4">
+              <label
+                for="status"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Status</label
+              >
+              <select
+                id="status"
+                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
+                required
+              >
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+
+            <!-- Views (hidden, default 0 or from DB when edit) -->
+            <input type="hidden" id="views" value="0" />
+
+            <!-- Created At (read-only, hanya tampil saat edit) -->
+            <div class="mb-4 hidden" id="createdAtWrapper">
+              <label
+                for="created_at"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Created At</label
+              >
+              <input
+                type="text"
+                id="created_at"
+                readonly
+                class="w-full p-2 border rounded-lg text-sm text-gray-500 bg-gray-100 border-gray-300"
+              />
+            </div>
+
+            <!-- Modal Footer -->
             <div class="flex justify-end space-x-2">
               <button
                 type="button"

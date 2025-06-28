@@ -57,6 +57,8 @@ $(document).ready(function () {
       id: btn.data("id"),
       title: btn.data("title"),
       content: btn.data("content"),
+      status: btn.data("status"),
+      views: btn.data("views"),
     });
     $("#formModalTitle").text("Edit Post");
     $("#postForm button[type='submit']")
@@ -91,6 +93,9 @@ $(document).ready(function () {
     $("#detailId").text(btn.data("id"));
     $("#detailTitle").text(btn.data("title"));
     $("#detailContent").text(btn.data("content"));
+    $("#detailStatus").text(btn.data("status"));
+    $("#detailViews").text(btn.data("views"));
+    $("#detailCreatedAt").text(btn.data("created_at").split(" ")[0]); // hanya tanggal
     $("#detailModal").removeClass("hidden").addClass("flex");
   });
 
@@ -107,7 +112,7 @@ $(document).ready(function () {
     if (query.length > 0) {
       api.searchPosts(query).then((data) => dom.renderTable(data.posts));
     } else {
-      loadPosts(); // kalau kosong, load semua post
+      loadPosts();
     }
   });
 });
