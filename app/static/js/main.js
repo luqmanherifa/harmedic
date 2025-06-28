@@ -10,11 +10,15 @@ $(document).ready(function () {
     $("#postForm button[type='submit']")
       .text("Save")
       .removeClass()
-      .addClass("bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700");
+      .addClass(
+        "text-white inline-flex items-center bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      );
     $("#cancelForm")
       .text("Cancel")
       .removeClass()
-      .addClass("bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600");
+      .addClass(
+        "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      );
     $("#formModal").removeClass("hidden").addClass("flex");
   });
 
@@ -58,11 +62,15 @@ $(document).ready(function () {
     $("#postForm button[type='submit']")
       .text("Update")
       .removeClass()
-      .addClass("bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700");
+      .addClass(
+        "text-white inline-flex items-center bg-yellow-600 hover:bg-yellow-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      );
     $("#cancelForm")
       .text("Cancel")
       .removeClass()
-      .addClass("bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600");
+      .addClass(
+        "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      );
     $("#formModal").removeClass("hidden").addClass("flex");
   });
 
