@@ -2,15 +2,37 @@ import os
 from flask import Blueprint, render_template, request, jsonify
 from flask import session, redirect, url_for
 from datetime import datetime
-from app.models import Post
+from app.models import Post, User
 from app import db
 from sqlalchemy import cast, String
+from werkzeug.security import generate_password_hash
 
 main = Blueprint(
     'main',
     __name__,
     template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'templates'))
 )
+
+@main.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Validasi: pastikan tidak duplikat username/email
+        if User.query.filter((User.username == username) | (User.email == email)).first():
+            return render_template('register.html', error="Username atau email sudah digunakan")
+
+        # Simpan user baru
+        user = User(username=username, email=email)
+        user.set_password(password)  # hash password menggunakan method di model
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('auth.login'))  # arahkan ke login setelah sukses
+
+    return render_template('register.html')
 
 @main.route('/dashboard')
 def dashboard():
