@@ -33,7 +33,7 @@ const dom = {
       .map(
         (post) => `
           <tr
-            class="bg-white border-b border-gray-300 hover:bg-gray-50"
+            class="bg-white border-b border-gray-200 hover:bg-gray-50"
             >
             <th
               scope="row"

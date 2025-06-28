@@ -23,17 +23,15 @@
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3"
       >
-        <a
-          href="https://flowbite.com/"
-          class="flex items-center space-x-3 rtl:space-x-reverse"
-        >
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            class="h-8"
-            alt="Flowbite Logo"
+            src="{{ url_for('static', filename='images/logo.svg') }}"
+            class="h-6"
+            alt="Harmedic Logo"
           />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap"
-            >Flowbite</span
+          <span
+            class="self-center text-lg font-bold whitespace-nowrap text-gray-600 hover:text-gray-700"
+            >Harmedic</span
           >
         </a>
         <div class="flex gap-3">
@@ -189,7 +187,7 @@
             class="w-full text-sm text-left rtl:text-right text-gray-500"
           >
             <thead
-              class="text-xs text-gray-700 uppercase bg-gray-100 border-b border-gray-300"
+              class="text-xs text-gray-700 uppercase bg-gray-100 border-b border-gray-200"
             >
               <tr>
                 <th scope="col" class="px-6 py-3">ID</th>
