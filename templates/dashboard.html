@@ -15,10 +15,10 @@
       }
     </style>
   </head>
-  <body class="bg-gray-100 text-gray-800 pt-20">
+  <body class="bg-white text-gray-800 pt-20">
     <!-- Navbar -->
     <nav
-      class="bg-white fixed w-full z-50 top-0 start-0 border-b border-gray-200"
+      class="bg-white fixed w-full z-50 top-0 start-0 border-b border-gray-300"
     >
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3"
@@ -80,7 +80,9 @@
       class="fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0 pt-14"
       aria-label="Sidebar"
     >
-      <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 pl-32">
+      <div
+        class="h-full px-3 py-4 overflow-y-auto bg-gray-50 pl-32 border-r border-gray-300"
+      >
         <ul class="space-y-2 font-medium">
           <li>
             <a
@@ -127,7 +129,7 @@
       </div>
     </aside>
 
-    <div class="px-10 py-4 pr-36 sm:ml-80">
+    <div class="px-10 py-4 pr-36 sm:ml-80 bg-white">
       <div class="rounded-lg">
         <h1 class="text-2xl font-bold mb-4">Post Management</h1>
         <div class="flex justify-between items-center mb-4 gap-4">
@@ -172,7 +174,7 @@
             <button
               type="button"
               id="openAddModal"
-              class="w-32 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-5 py-3 text-center"
+              class="w-32 text-white bg-green-600 hover:bg-green-700 font-medium rounded-full text-sm px-5 py-3 text-center"
             >
               Add Post
             </button>
@@ -186,7 +188,9 @@
             id="postTable"
             class="w-full text-sm text-left rtl:text-right text-gray-500"
           >
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <thead
+              class="text-xs text-gray-700 uppercase bg-gray-100 border-b border-gray-300"
+            >
               <tr>
                 <th scope="col" class="px-6 py-3">ID</th>
                 <th scope="col" class="px-6 py-3">TITLE</th>
@@ -214,7 +218,7 @@
         <div class="relative bg-white rounded-lg shadow-sm">
           <!-- Modal header -->
           <div
-            class="flex items-center justify-between p-4 md:p-5 border-b border-gray-200 rounded-t"
+            class="flex items-center justify-between p-4 md:p-5 border-b border-gray-300 rounded-t"
           >
             <h3 class="text-lg font-semibold text-gray-900">Detail Post</h3>
           </div>
@@ -229,7 +233,7 @@
                 type="button"
                 id="closeModal"
                 data-modal-toggle="detailModal"
-                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
               >
                 Close
               </button>
@@ -252,7 +256,7 @@
         <div class="relative bg-white rounded-lg shadow-sm">
           <!-- Modal header -->
           <div
-            class="flex items-center justify-between p-4 md:p-5 border-b border-gray-200 rounded-t"
+            class="flex items-center justify-between p-4 md:p-5 border-b border-gray-300 rounded-t"
           >
             <h3 class="text-lg font-semibold text-gray-900">Add Post</h3>
           </div>
@@ -269,7 +273,7 @@
                 type="text"
                 id="title"
                 placeholder="Title"
-                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
                 required
               />
             </div>
@@ -283,7 +287,7 @@
                 id="content"
                 placeholder="Content"
                 rows="4"
-                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
                 required
               ></textarea>
             </div>
@@ -298,7 +302,7 @@
               </button>
               <button
                 type="submit"
-                class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 <svg
                   class="me-1 -ms-1 w-5 h-5"
