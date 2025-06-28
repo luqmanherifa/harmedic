@@ -46,7 +46,7 @@
           >
             <a
               href="{{ url_for('main.home') }}"
-              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
+              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
             >
               Home
             </a>
@@ -56,7 +56,7 @@
           >
             <a
               href="{{ url_for('auth.logout') }}"
-              class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
+              class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm px-4 py-2 text-center"
             >
               Logout
             </a>
@@ -67,7 +67,7 @@
           >
             <a
               href="{{ url_for('auth.login') }}"
-              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
+              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
             >
               Login
             </a>
@@ -93,7 +93,7 @@
               class="flex items-center p-2 rounded-lg hover:bg-gray-100 {% if request.path == url_for('main.dashboard') %}text-blue-700 font-semibold{% else %}text-gray-900{% endif %}"
             >
               <svg
-                class="w-4 h-4 transition duration-75 {% if request.path == url_for('main.dashboard') %}text-blue-700{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
+                class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('main.dashboard') %}text-blue-700{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -106,7 +106,7 @@
                   d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
                 />
               </svg>
-              <span class="ms-3">Posts</span>
+              <span class="ms-3">Post</span>
             </a>
           </li>
 
@@ -116,7 +116,7 @@
               class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
             >
               <svg
-                class="shrink-0 w-4 h-4 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                class="shrink-0 w-4 h-4 ml-2 text-gray-500 transition duration-75 group-hover:text-gray-900"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -126,7 +126,7 @@
                   d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"
                 />
               </svg>
-              <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
+              <span class="flex-1 ms-3 whitespace-nowrap">User</span>
             </a>
           </li>
         </ul>
@@ -135,7 +135,7 @@
 
     <div class="px-10 py-4 pr-36 sm:ml-80 bg-white">
       <div class="rounded-lg">
-        <h1 class="text-2xl font-bold mb-4">Post Management</h1>
+        <h1 class="text-2xl font-bold mb-4">Post Dashboard</h1>
         <div class="flex justify-between items-center mb-4 gap-4">
           <!-- Search Input -->
           <div class="w-full">
@@ -167,7 +167,7 @@
               <input
                 type="search"
                 id="searchInput"
-                class="block w-full p-3 ps-12 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50"
+                class="block w-full p-3 ps-12 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50"
                 placeholder="Search post..."
               />
             </div>
@@ -178,7 +178,7 @@
             <button
               type="button"
               id="openAddModal"
-              class="w-32 text-white bg-green-700 hover:bg-green-700 font-medium rounded-full text-sm px-5 py-3 text-center"
+              class="w-32 text-white bg-green-700 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-3 text-center"
             >
               Add Post
             </button>
