@@ -14,8 +14,8 @@ const dom = {
     this.editingPostId = null;
     $("#postForm button")
       .text("Add Post")
-      .removeClass("bg-green-600")
-      .addClass("bg-blue-600");
+      .removeClass("bg-green-700")
+      .addClass("bg-blue-700");
   },
 
   fillForm({ id, title, content }) {
@@ -25,7 +25,7 @@ const dom = {
     $("#postForm button")
       .text("Update Post")
       .removeClass("bg-blue-600")
-      .addClass("bg-green-600");
+      .addClass("bg-green-700");
   },
 
   renderTable(posts) {

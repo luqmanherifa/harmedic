@@ -2,12 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>CRUD Flask</title>
+    <title>Harmedic Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ url_for('static', filename='images/logo.svg') }}"
     />
     <style>
       body {
@@ -84,11 +89,11 @@
         <ul class="space-y-2 font-medium">
           <li>
             <a
-              href="#"
-              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
+              href="{{ url_for('main.dashboard') }}"
+              class="flex items-center p-2 rounded-lg hover:bg-gray-100 {% if request.path == url_for('main.dashboard') %}text-blue-700 font-semibold{% else %}text-gray-900{% endif %}"
             >
               <svg
-                class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                class="w-4 h-4 transition duration-75 {% if request.path == url_for('main.dashboard') %}text-blue-500{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -101,16 +106,17 @@
                   d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
                 />
               </svg>
-              <span class="ms-3">Dashboard</span>
+              <span class="ms-3">Posts</span>
             </a>
           </li>
+
           <li>
             <a
               href="#"
               class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
             >
               <svg
-                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                class="shrink-0 w-4 h-4 text-gray-500 transition duration-75 group-hover:text-gray-900"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -172,7 +178,7 @@
             <button
               type="button"
               id="openAddModal"
-              class="w-32 text-white bg-green-600 hover:bg-green-700 font-medium rounded-full text-sm px-5 py-3 text-center"
+              class="w-32 text-white bg-green-700 hover:bg-green-700 font-medium rounded-full text-sm px-5 py-3 text-center"
             >
               Add Post
             </button>

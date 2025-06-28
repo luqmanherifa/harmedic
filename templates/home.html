@@ -2,11 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Home - Post Cards</title>
+    <title>Harmedic Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ url_for('static', filename='images/logo.svg') }}"
     />
     <style>
       body {
@@ -159,8 +164,6 @@
     <!-- Posts -->
     <div class="bg-white pt-5">
       <div class="mx-auto max-w-7xl relative z-10">
-        <h1 class="text-3xl font-bold mb-10 text-center">Post Cards</h1>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {% for post in posts %}
           <a
@@ -178,7 +181,7 @@
               >
                 {{ post.title }}
               </h2>
-              <p class="mt-2 line-clamp-3 text-base font-normal text-gray-700">
+              <p class="mt-2 line-clamp-3 text-base font-normal text-gray-600">
                 <span class="text-gray-400">28 June 2025 • </span>
                 {{ post.content }}
               </p>

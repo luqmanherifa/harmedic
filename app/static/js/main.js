@@ -11,7 +11,7 @@ $(document).ready(function () {
       .text("Save")
       .removeClass()
       .addClass(
-        "text-white inline-flex items-center bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        "text-white inline-flex items-center bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       );
     $("#cancelForm")
       .text("Cancel")
