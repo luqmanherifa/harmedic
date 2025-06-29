@@ -48,6 +48,8 @@
               </h2>
               <p class="mt-2 line-clamp-3 text-xs font-normal text-gray-600">
                 <span class="text-gray-400 flex items-center text-sm">
+                  <span>{{ post.author.username }}</span>
+                  <span class="mx-2">•</span>
                   <span>{{ post.created_at.strftime('%B %d, %Y') }}</span>
                   <span class="mx-2">•</span>
                   <span>{{ post.views }} views</span>

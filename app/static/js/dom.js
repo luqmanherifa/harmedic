@@ -61,6 +61,7 @@ const dom = {
             <td class="px-6 py-4">${post.status}</td> 
             <td class="px-6 py-4">${post.views}</td>  
             <td class="px-6 py-4">${post.created_at.split(" ")[0]}</td>
+            <td class="px-6 py-4">${post.author}</td>
             <td class="px-6 py-4">
               <img 
                 src="${
@@ -80,6 +81,7 @@ const dom = {
                 data-status="${post.status}" 
                 data-views="${post.views}" 
                 data-created_at="${post.created_at}"
+                data-author="${post.author}"
                 data-image="${
                   post.image ? post.image.replace("/static/uploads/", "") : ""
                 }"

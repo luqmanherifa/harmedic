@@ -15,26 +15,57 @@
       </div>
 
       <!-- Modal body -->
-      <div class="p-4 md:p-5 space-y-4 text-sm text-gray-900">
-        <p><strong>ID:</strong> <span id="detailId"></span></p>
-        <p><strong>Title:</strong> <span id="detailTitle"></span></p>
-        <p><strong>Content:</strong> <span id="detailContent"></span></p>
-        <p><strong>Status:</strong> <span id="detailStatus"></span></p>
-        <p><strong>Views:</strong> <span id="detailViews"></span></p>
-        <p><strong>Date:</strong> <span id="detailCreatedAt"></span></p>
-        <p><strong>Image:</strong></p>
-        <img
-          id="detailImage"
-          class="w-[200px] h-[150px] object-cover rounded"
-          src=""
-          alt="Post Image"
-        />
+      <div class="p-4 md:p-5 space-y-2 text-sm text-gray-900">
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>ID</strong>
+          <span>:</span>
+          <span id="detailId"></span>
+        </div>
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>Title</strong>
+          <span>:</span>
+          <span id="detailTitle"></span>
+        </div>
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>Content</strong>
+          <span>:</span>
+          <span id="detailContent"></span>
+        </div>
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>Status</strong>
+          <span>:</span>
+          <span id="detailStatus"></span>
+        </div>
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>Views</strong>
+          <span>:</span>
+          <span id="detailViews"></span>
+        </div>
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>Date</strong>
+          <span>:</span>
+          <span id="detailCreatedAt"></span>
+        </div>
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>Author</strong>
+          <span>:</span>
+          <span id="detailAuthor"></span>
+        </div>
+
+        <div class="pt-0">
+          <p><strong>Image</strong></p>
+          <img
+            id="detailImage"
+            class="w-[200px] h-[150px] object-cover rounded pt-3"
+            src=""
+            alt="Post Image"
+          />
+        </div>
 
         <div class="text-right pt-4">
           <button
             type="button"
             id="closeModal"
-            data-modal-toggle="detailModal"
             class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
           >
             Close

@@ -106,6 +106,7 @@ $(document).ready(function () {
     $("#detailStatus").text(btn.data("status"));
     $("#detailViews").text(btn.data("views"));
     $("#detailCreatedAt").text(btn.data("created_at").split(" ")[0]);
+    $("#detailAuthor").text(btn.data("author"));
 
     const image = btn.data("image");
     const imageUrl = image
