@@ -13,7 +13,7 @@ auth = Blueprint(
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user' in session:
-        return redirect(url_for('main.dashboard'))
+        return redirect(url_for('pages.dashboard'))
 
     error = None
     if request.method == 'POST':
@@ -24,7 +24,7 @@ def login():
 
         if user and user.check_password(password):
             session['user'] = user.username
-            return redirect(url_for('main.dashboard'))
+            return redirect(url_for('pages.dashboard'))
         else:
             error = 'Username atau password salah'
 
