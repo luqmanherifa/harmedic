@@ -84,4 +84,23 @@ const dom = {
 
     $("#postTable tbody").html(rows);
   },
+
+  renderUserTable(users) {
+    const rows = users
+      .map(
+        (user) => `
+          <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+              ${user.id}
+            </th>
+            <td class="px-6 py-4">${user.username}</td>
+            <td class="px-6 py-4">${user.email}</td>
+            <td class="px-6 py-4">${user.created_at.split(" ")[0]}</td>
+          </tr>
+        `
+      )
+      .join("");
+
+    $("#postTable tbody").html(rows); // asumsi kamu pakai ID table yg sama
+  },
 };

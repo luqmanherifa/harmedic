@@ -40,6 +40,12 @@ def dashboard():
         return redirect(url_for('auth.login'))
     return render_template('dashboard.html')
 
+@main.route('/user')
+def user():
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+    return render_template('user.html')
+
 @main.route('/add_post', methods=['POST'])
 def add_post():
     data = request.get_json()
@@ -64,6 +70,40 @@ def get_posts():
             'status': p.status,
             'created_at': p.created_at.strftime('%Y-%m-%d %H:%M:%S')
         } for p in posts]
+    })
+
+@main.route('/get_users')
+def get_users():
+    users = User.query.all()
+    return jsonify({
+        'users': [ 
+            {
+                'id': u.id,
+                'username': u.username,
+                'email': u.email,
+                'created_at': u.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            } for u in users
+        ]
+    })
+    
+@main.route('/search_users')
+def search_users():
+    query = request.args.get('q', '', type=str)
+
+    users = User.query.filter(
+        (User.username.like(f"%{query}%")) |
+        (User.email.like(f"%{query}%"))
+    ).all()
+
+    return jsonify({
+        'users': [
+            {
+                'id': u.id,
+                'username': u.username,
+                'email': u.email,
+                'created_at': u.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            } for u in users
+        ]
     })
 
 @main.route('/update_post/<int:id>', methods=['PUT'])

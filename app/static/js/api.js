@@ -26,4 +26,8 @@ const api = {
     }),
 
   searchPosts: (query) => $.get("/search_posts", { q: query }),
+
+  getUsers: () => $.get("/get_users"),
+
+  searchUsers: (query) => $.get("/search_users", { q: query }),
 };
