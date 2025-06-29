@@ -18,8 +18,9 @@
     <div class="flex gap-3">
       {% if session.get('user') %}
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        {% if request.path == url_for('main.dashboard') %}
-        <!-- Saat ini di dashboard, tombol ke Home -->
+        {% if request.path.startswith('/dashboard') or
+        request.path.startswith('/user') %}
+        <!-- Sedang di halaman dashboard/user, tampilkan tombol Home -->
         <a
           href="{{ url_for('main.home') }}"
           class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
@@ -27,7 +28,7 @@
           Home
         </a>
         {% else %}
-        <!-- Saat ini bukan di dashboard, tombol ke Dashboard -->
+        <!-- Selain itu, tampilkan tombol Dashboard -->
         <a
           href="{{ url_for('main.dashboard') }}"
           class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
