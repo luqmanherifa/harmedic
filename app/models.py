@@ -1,6 +1,8 @@
 from datetime import datetime
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import relationship
+from sqlalchemy import ForeignKey
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -12,6 +14,10 @@ class Post(db.Model):
     views = db.Column(db.Integer, default=0)
     status = db.Column(db.Enum('pending', 'approved', 'rejected', name='post_status'), default='pending', nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Foreign key ke User
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    author = relationship('User', backref='posts')  # akses: post.author.username
 
     def __repr__(self):
         return f'<Post {self.title}>'
