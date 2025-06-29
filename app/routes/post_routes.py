@@ -4,19 +4,36 @@ from app.models import Post
 from app import db
 from sqlalchemy import cast, String
 from datetime import datetime
+import os
+from werkzeug.utils import secure_filename
+from flask import current_app
 
 posts_bp = Blueprint('posts', __name__)
 
 @posts_bp.route('/add_post', methods=['POST'])
 def add_post():
-    data = request.get_json()
+    title = request.form.get('title')
+    content = request.form.get('content')
+    status = request.form.get('status', 'pending')
+    image_file = request.files.get('image')
+    image_filename = None
+
+    if image_file and image_file.filename != '':
+        image_filename = secure_filename(image_file.filename)
+        upload_path = os.path.join('app', 'static', 'uploads', image_filename)
+        image_file.save(upload_path)
+
     post = Post(
-        title=data['title'],
-        content=data['content'],
-        status=data.get('status', 'pending')
+        title=title,
+        content=content,
+        image=image_filename,
+        status=status,
+        views=0
     )
+
     db.session.add(post)
     db.session.commit()
+
     return jsonify({'message': 'Post added successfully'})
 
 @posts_bp.route('/get_posts')
@@ -27,6 +44,7 @@ def get_posts():
             'id': p.id,
             'title': p.title,
             'content': p.content,
+            'image': f"/static/uploads/{p.image}" if p.image else None,
             'views': p.views,
             'status': p.status,
             'created_at': p.created_at.strftime('%Y-%m-%d %H:%M:%S')
@@ -68,6 +86,8 @@ def search_posts():
             'content': p.content,
             'views': p.views,
             'status': p.status,
-            'created_at': p.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            'created_at': p.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'image': f'/static/uploads/{p.image}' if p.image else None  # ← tambahkan koma di akhir ini
         } for p in posts]
     })
+
