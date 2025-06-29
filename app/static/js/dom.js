@@ -5,8 +5,8 @@ const dom = {
     return {
       title: $("#title").val(),
       content: $("#content").val(),
-      status: $("#status").val(), // ✅ penting agar bisa update status
-      views: parseInt($("#views").val()) || 0, // ✅ untuk mempertahankan jumlah views
+      status: $("#status").val(),
+      views: parseInt($("#views").val()) || 0,
     };
   },
 
@@ -15,6 +15,7 @@ const dom = {
     $("#content").val("");
     $("#status").val("pending");
     $("#views").val("0");
+    $("#image").val(""); // reset input file
     this.editingPostId = null;
     $("#postForm button")
       .text("Add Post")
@@ -39,7 +40,7 @@ const dom = {
       posts.length === 0
         ? `
       <tr>
-        <td colspan="9" class="text-center text-red-600 font-medium py-4">
+        <td colspan="10" class="text-center text-red-600 font-medium py-4">
           Tidak ada data ditemukan.
         </td>
       </tr>
@@ -55,7 +56,17 @@ const dom = {
             <td class="px-6 py-4">${post.content}</td>
             <td class="px-6 py-4">${post.status}</td> 
             <td class="px-6 py-4">${post.views}</td>  
-            <td class="px-6 py-4">${post.created_at.split(" ")[0]}</td> 
+            <td class="px-6 py-4">${post.created_at.split(" ")[0]}</td>
+            <td class="px-6 py-4">
+              <img 
+                src="${
+                  post.image ? post.image : "/static/images/harmedic.png"
+                }" 
+                alt="Post Image" 
+                class="w-8 h-8 object-cover rounded"
+              />
+            </td>
+
             <td class="px-0 py-4">
               <button
                 class="detail-btn font-medium text-blue-600 hover:underline"
@@ -65,6 +76,9 @@ const dom = {
                 data-status="${post.status}" 
                 data-views="${post.views}" 
                 data-created_at="${post.created_at}"
+                data-image="${
+                  post.image ? post.image.replace("/static/uploads/", "") : ""
+                }"
               >
                 Detail
               </button>

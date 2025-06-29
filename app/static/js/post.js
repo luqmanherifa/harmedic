@@ -21,6 +21,8 @@ $(document).ready(function () {
         "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       );
     $("#formModal").removeClass("hidden").addClass("flex");
+
+    $("#imageWrapper").show();
   });
 
   $("#cancelForm").on("click", function () {
@@ -29,10 +31,21 @@ $(document).ready(function () {
 
   $("#postForm").on("submit", function (e) {
     e.preventDefault();
-    const data = dom.getFormData();
-    const action = dom.editingPostId
-      ? api.updatePost(dom.editingPostId, data)
-      : api.addPost(data);
+
+    let action;
+    if (dom.editingPostId) {
+      const data = dom.getFormData();
+      action = api.updatePost(dom.editingPostId, data);
+    } else {
+      const formData = new FormData(this);
+      action = $.ajax({
+        url: "/add_post",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+      });
+    }
 
     action
       .then(() => {
@@ -71,6 +84,8 @@ $(document).ready(function () {
         "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       );
     $("#formModal").removeClass("hidden").addClass("flex");
+
+    $("#imageWrapper").hide();
   });
 
   $("#postTable").on("click", ".delete-btn", function () {
@@ -91,6 +106,13 @@ $(document).ready(function () {
     $("#detailStatus").text(btn.data("status"));
     $("#detailViews").text(btn.data("views"));
     $("#detailCreatedAt").text(btn.data("created_at").split(" ")[0]);
+
+    const image = btn.data("image");
+    const imageUrl = image
+      ? `/static/uploads/${image}`
+      : "/static/images/harmedic.png";
+    $("#detailImage").attr("src", imageUrl);
+
     $("#detailModal").removeClass("hidden").addClass("flex");
   });
 
