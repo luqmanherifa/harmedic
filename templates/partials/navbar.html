@@ -1,0 +1,60 @@
+<nav class="bg-white fixed w-full z-50 top-0 start-0 border-b border-gray-300">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3"
+  >
+    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img
+        src="{{ url_for('static', filename='images/logo.svg') }}"
+        class="h-6"
+        alt="Harmedic Logo"
+      />
+      <span
+        class="self-center text-lg font-bold whitespace-nowrap text-gray-600 hover:text-gray-700"
+      >
+        Harmedic
+      </span>
+    </a>
+
+    <div class="flex gap-3">
+      {% if session.get('user') %}
+      <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        {% if request.path == url_for('main.dashboard') %}
+        <!-- Saat ini di dashboard, tombol ke Home -->
+        <a
+          href="{{ url_for('main.home') }}"
+          class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
+        >
+          Home
+        </a>
+        {% else %}
+        <!-- Saat ini bukan di dashboard, tombol ke Dashboard -->
+        <a
+          href="{{ url_for('main.dashboard') }}"
+          class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
+        >
+          Dashboard
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <a
+          href="{{ url_for('auth.logout') }}"
+          class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm px-4 py-2 text-center"
+        >
+          Logout
+        </a>
+      </div>
+      {% else %}
+      <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <a
+          href="{{ url_for('auth.login') }}"
+          class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
+        >
+          Login
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</nav>
