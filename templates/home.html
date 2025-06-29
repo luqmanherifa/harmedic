@@ -32,7 +32,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {% for post in posts %}
           <a
-            href="{{ url_for('main.post_detail', id=post.id) }}"
+            href="{{ url_for('pages.post_detail', id=post.id) }}"
             class="group cursor-pointer rounded-lg border border-gray-300 bg-white hover:bg-blue-50 transition-all"
           >
             <img

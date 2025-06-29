@@ -24,7 +24,7 @@
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
       <a
-        href="{{ url_for('main.home') }}"
+        href="{{ url_for('pages.home') }}"
         class="flex items-center mb-6 text-2xl font-bold text-gray-700"
       >
         <img
@@ -44,7 +44,7 @@
           <form
             class="space-y-4 md:space-y-6"
             method="POST"
-            action="{{ url_for('main.register') }}"
+            action="{{ url_for('users.register') }}"
           >
             <div>
               <label

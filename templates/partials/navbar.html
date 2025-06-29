@@ -22,7 +22,7 @@
         request.path.startswith('/user') %}
         <!-- Sedang di halaman dashboard/user, tampilkan tombol Home -->
         <a
-          href="{{ url_for('main.home') }}"
+          href="{{ url_for('pages.home') }}"
           class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
         >
           Home
@@ -30,7 +30,7 @@
         {% else %}
         <!-- Selain itu, tampilkan tombol Dashboard -->
         <a
-          href="{{ url_for('main.dashboard') }}"
+          href="{{ url_for('pages.dashboard') }}"
           class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
         >
           Dashboard
