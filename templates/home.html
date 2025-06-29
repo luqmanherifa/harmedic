@@ -33,11 +33,11 @@
           {% for post in posts %}
           <a
             href="{{ url_for('pages.post_detail', id=post.id) }}"
-            class="group cursor-pointer rounded-lg border border-gray-300 bg-white hover:bg-blue-50 transition-all"
+            class="group cursor-pointer rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition-all"
           >
             <img
-              class="h-auto w-full rounded-b-none rounded-t-lg"
-              src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800"
+              class="w-[410px] h-[308px] object-cover rounded-b-none rounded-t-lg"
+              src="{{ url_for('static', filename='uploads/' ~ post.image) if post.image else url_for('static', filename='images/harmedic.png') }}"
               alt="{{ post.title }}"
             />
             <div class="p-5">
@@ -46,8 +46,13 @@
               >
                 {{ post.title }}
               </h2>
+              <p class="mt-2 line-clamp-3 text-xs font-normal text-gray-600">
+                <span class="text-gray-400"
+                  >{{ post.created_at.strftime('%B %d, %Y') }} • {{ post.views
+                  }} views
+                </span>
+              </p>
               <p class="mt-2 line-clamp-3 text-base font-normal text-gray-600">
-                <span class="text-gray-400">28 June 2025 • </span>
                 {{ post.content }}
               </p>
             </div>

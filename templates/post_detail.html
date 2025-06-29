@@ -23,23 +23,25 @@
     <!-- Navbar -->
     {% include 'partials/navbar.html' %}
 
-    <div class="flex justify-center pt-20 min-h-screen">
+    <div class="flex justify-center pt-24 min-h-screen">
       <div class="mx-auto">
         <img
-          class="mx-auto mt-5 rounded-lg"
-          src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=400"
-          alt=""
+          class="w-[500px] h-[375px] object-cover rounded-lg"
+          src="{{ url_for('static', filename='uploads/' ~ post.image) if post.image else url_for('static', filename='images/harmedic.png') }}"
+          alt="{{ post.title }}"
         />
         <div class="mb-2 mt-4 flex items-center justify-between">
           <p class="text-base font-medium text-gray-600">
             Ditulis oleh Luqman Herifa
           </p>
-          <p class="text-base font-medium text-gray-400">28 June 2025</p>
+          <p class="text-xs text-gray-400">
+            {{ post.created_at.strftime('%B %d, %Y') }} • {{ post.views }} views
+          </p>
         </div>
-        <h1 class="mb-2 mt-4 text-2xl font-bold text-gray-700">
+        <h1 class="mb-2 mt-4 text-2xl font-bold text-gray-700 w-[500px]">
           {{ post.title }}
         </h1>
-        <p class="text-base leading-relaxed text-gray-700">
+        <p class="text-base leading-relaxed text-gray-700 w-[500px]">
           {{ post.content }}
         </p>
         <div class="mt-6">

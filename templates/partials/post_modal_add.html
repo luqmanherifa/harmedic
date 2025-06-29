@@ -28,6 +28,7 @@
           <input
             type="text"
             id="title"
+            name="title"
             placeholder="Title"
             class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
             required
@@ -43,11 +44,29 @@
           >
           <textarea
             id="content"
+            name="content"
             placeholder="Content"
             rows="4"
             class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
             required
           ></textarea>
+        </div>
+
+        <!-- Image -->
+        <div class="mb-4" id="imageWrapper">
+          <label
+            for="image"
+            class="block mb-2 text-sm font-medium text-gray-900"
+          >
+            Upload Image
+          </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            class="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 border border-gray-300 rounded-lg bg-gray-50 cursor-pointer"
+          />
         </div>
 
         <!-- Status -->
@@ -59,6 +78,7 @@
           >
           <select
             id="status"
+            name="status"
             class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
             required
           >
@@ -69,7 +89,7 @@
         </div>
 
         <!-- Views (hidden, default 0 or from DB when edit) -->
-        <input type="hidden" id="views" value="0" />
+        <input type="hidden" id="views" name="views" value="0" />
 
         <!-- Created At (read-only, hanya tampil saat edit) -->
         <div class="mb-4 hidden" id="createdAtWrapper">
