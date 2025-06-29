@@ -30,6 +30,7 @@ def home():
 @pages.route('/post/<int:id>')
 def post_detail(id):
     post = Post.query.get_or_404(id)
-    post.views += 1
-    db.session.commit()
+    if 'user' in session:
+        post.views += 1
+        db.session.commit()
     return render_template('post_detail.html', post=post)

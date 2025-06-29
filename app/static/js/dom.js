@@ -52,8 +52,12 @@ const dom = {
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
               ${post.id}
             </th>
-            <td class="px-6 py-4">${post.title}</td>
-            <td class="px-6 py-4">${post.content}</td>
+            <td class="px-6 py-4 max-w-[100px]">
+              <p class="line-clamp-1">${post.title}</p>
+            </td>
+            <td class="px-6 py-4 max-w-[100px]">
+              <p class="line-clamp-1">${post.content}</p>
+            </td>
             <td class="px-6 py-4">${post.status}</td> 
             <td class="px-6 py-4">${post.views}</td>  
             <td class="px-6 py-4">${post.created_at.split(" ")[0]}</td>

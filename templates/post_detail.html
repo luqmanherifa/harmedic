@@ -34,8 +34,12 @@
           <p class="text-base font-medium text-gray-600">
             Ditulis oleh Luqman Herifa
           </p>
-          <p class="text-xs text-gray-400">
-            {{ post.created_at.strftime('%B %d, %Y') }} • {{ post.views }} views
+          <p class="text-sm text-gray-400">
+            <span class="flex items-center">
+              <span>{{ post.created_at.strftime('%B %d, %Y') }}</span>
+              <span class="mx-2">•</span>
+              <span>{{ post.views }} views</span>
+            </span>
           </p>
         </div>
         <h1 class="mb-2 mt-4 text-2xl font-bold text-gray-700 w-[500px]">
