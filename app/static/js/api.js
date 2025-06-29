@@ -1,4 +1,5 @@
 const api = {
+  // ====== POST ======
   getPosts: () => $.get("/get_posts"),
 
   addPost: (data) =>
@@ -27,7 +28,23 @@ const api = {
 
   searchPosts: (query) => $.get("/search_posts", { q: query }),
 
+  // ====== USER ======
   getUsers: () => $.get("/get_users"),
 
   searchUsers: (query) => $.get("/search_users", { q: query }),
+
+  updateUser: (id, data) =>
+    $.ajax({
+      url: `/update_user/${id}`,
+      type: "PUT",
+      contentType: "application/json",
+      processData: false,
+      data: JSON.stringify(data),
+    }),
+
+  deleteUser: (id) =>
+    $.ajax({
+      url: `/delete_user/${id}`,
+      type: "DELETE",
+    }),
 };

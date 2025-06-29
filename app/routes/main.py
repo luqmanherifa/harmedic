@@ -86,6 +86,26 @@ def get_users():
         ]
     })
     
+@main.route('/update_user/<int:id>', methods=['PUT'])
+def update_user(id):
+    data = request.get_json()
+    user = User.query.get_or_404(id)
+
+    user.username = data.get('username', user.username)
+    user.email = data.get('email', user.email)
+
+    db.session.commit()
+
+    return jsonify({'message': 'User updated successfully'})
+
+@main.route('/delete_user/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.get_or_404(id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return jsonify({'message': 'User deleted successfully'})
+    
 @main.route('/search_users')
 def search_users():
     query = request.args.get('q', '', type=str)
