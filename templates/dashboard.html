@@ -22,60 +22,7 @@
   </head>
   <body class="bg-white text-gray-800 pt-20">
     <!-- Navbar -->
-    <nav
-      class="bg-white fixed w-full z-50 top-0 start-0 border-b border-gray-300"
-    >
-      <div
-        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3"
-      >
-        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img
-            src="{{ url_for('static', filename='images/logo.svg') }}"
-            class="h-6"
-            alt="Harmedic Logo"
-          />
-          <span
-            class="self-center text-lg font-bold whitespace-nowrap text-gray-600 hover:text-gray-700"
-            >Harmedic</span
-          >
-        </a>
-        <div class="flex gap-3">
-          {% if session.get('user') %}
-          <div
-            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
-          >
-            <a
-              href="{{ url_for('main.home') }}"
-              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
-            >
-              Home
-            </a>
-          </div>
-          <div
-            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
-          >
-            <a
-              href="{{ url_for('auth.logout') }}"
-              class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm px-4 py-2 text-center"
-            >
-              Logout
-            </a>
-          </div>
-          {% else %}
-          <div
-            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
-          >
-            <a
-              href="{{ url_for('auth.login') }}"
-              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
-            >
-              Login
-            </a>
-          </div>
-          {% endif %}
-        </div>
-      </div>
-    </nav>
+    {% include 'partials/navbar.html' %}
 
     <!-- Dashboard -->
     <aside
@@ -112,11 +59,11 @@
 
           <li>
             <a
-              href="#"
-              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+              href="{{ url_for('main.user') }}"
+              class="flex items-center p-2 rounded-lg hover:bg-gray-100 {% if request.path == url_for('main.user') %}text-blue-700 font-semibold{% else %}text-gray-900{% endif %}"
             >
               <svg
-                class="shrink-0 w-4 h-4 ml-2 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('main.user') %}text-blue-700{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -379,6 +326,6 @@
 
     <script src="{{ url_for('static', filename='js/api.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/post.js') }}"></script>
   </body>
 </html>
