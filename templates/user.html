@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Harmedic Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ url_for('static', filename='images/logo.svg') }}"
+    />
+    <style>
+      body {
+        font-family: "Nunito", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-800 pt-20">
+    <!-- Navbar -->
+    <nav
+      class="bg-white fixed w-full z-50 top-0 start-0 border-b border-gray-300"
+    >
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3"
+      >
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img
+            src="{{ url_for('static', filename='images/logo.svg') }}"
+            class="h-6"
+            alt="Harmedic Logo"
+          />
+          <span
+            class="self-center text-lg font-bold whitespace-nowrap text-gray-600 hover:text-gray-700"
+            >Harmedic</span
+          >
+        </a>
+        <div class="flex gap-3">
+          {% if session.get('user') %}
+          <div
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <a
+              href="{{ url_for('main.home') }}"
+              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
+            >
+              Home
+            </a>
+          </div>
+          <div
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <a
+              href="{{ url_for('auth.logout') }}"
+              class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm px-4 py-2 text-center"
+            >
+              Logout
+            </a>
+          </div>
+          {% else %}
+          <div
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <a
+              href="{{ url_for('auth.login') }}"
+              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-2 text-center"
+            >
+              Login
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <aside
+      id="default-sidebar"
+      class="fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0 pt-14"
+      aria-label="Sidebar"
+    >
+      <div
+        class="h-full px-3 py-4 overflow-y-auto bg-gray-50 pl-32 border-r border-gray-300"
+      >
+        <ul class="space-y-2 font-medium">
+          <li>
+            <a
+              href="{{ url_for('main.dashboard') }}"
+              class="flex items-center p-2 rounded-lg hover:bg-gray-100 {% if request.path == url_for('main.dashboard') %}text-blue-700 font-semibold{% else %}text-gray-900{% endif %}"
+            >
+              <svg
+                class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('main.dashboard') %}text-blue-700{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 22 21"
+              >
+                <path
+                  d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
+                />
+                <path
+                  d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
+                />
+              </svg>
+              <span class="ms-3">User</span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="{{ url_for('main.user') }}"
+              class="flex items-center p-2 rounded-lg hover:bg-gray-100 {% if request.path == url_for('main.user') %}text-blue-700 font-semibold{% else %}text-gray-900{% endif %}"
+            >
+              <svg
+                class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('main.user') %}text-blue-700{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 18"
+              >
+                <path
+                  d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">User</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="px-10 py-4 pr-36 sm:ml-80 bg-white">
+      <div class="rounded-lg">
+        <h1 class="text-2xl font-bold mb-4">User Dashboard</h1>
+        <div class="flex justify-between items-center mb-4 gap-4">
+          <!-- Search Input -->
+          <div class="w-full">
+            <label
+              for="default-search"
+              class="mb-2 text-sm font-medium text-gray-900 sr-only"
+              >Search</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-5 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                id="searchInput"
+                class="block w-full p-3 ps-12 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50"
+                placeholder="Search user..."
+              />
+            </div>
+          </div>
+
+          <!-- Tombol Add User -->
+          <div>
+            <button
+              type="button"
+              id="openAddModal"
+              class="w-32 text-white bg-green-700 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-3 text-center"
+            >
+              Add User
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="relative overflow-x-auto border border-gray-300 sm:rounded-xl"
+        >
+          <table
+            id="postTable"
+            class="w-full text-sm text-left rtl:text-right text-gray-500"
+          >
+            <thead
+              class="text-xs text-gray-700 uppercase bg-gray-100 border-b border-gray-200"
+            >
+              <tr>
+                <th scope="col" class="px-6 py-3">ID</th>
+                <th scope="col" class="px-6 py-3">Username</th>
+                <th scope="col" class="px-6 py-3">Email</th>
+                <th scope="col" class="px-6 py-3">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data akan diisi oleh jQuery -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Detail -->
+    <div
+      id="detailModal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-40"
+    >
+      <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow-sm">
+          <!-- Modal header -->
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b border-gray-300 rounded-t"
+          >
+            <h3 class="text-lg font-semibold text-gray-900">Detail User</h3>
+          </div>
+
+          <!-- Modal body -->
+          <div class="p-4 md:p-5 space-y-4 text-sm text-gray-900">
+            <p><strong>ID:</strong> <span id="detailId"></span></p>
+            <p><strong>Title:</strong> <span id="detailTitle"></span></p>
+            <p><strong>Content:</strong> <span id="detailContent"></span></p>
+            <p><strong>Status:</strong> <span id="detailStatus"></span></p>
+            <p><strong>Views:</strong> <span id="detailViews"></span></p>
+            <p><strong>Date:</strong> <span id="detailCreatedAt"></span></p>
+
+            <div class="text-right pt-4">
+              <button
+                type="button"
+                id="closeModal"
+                data-modal-toggle="detailModal"
+                class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Add/Edit User -->
+    <div
+      id="formModal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-40"
+    >
+      <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow-sm">
+          <!-- Modal header -->
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b border-gray-300 rounded-t"
+          >
+            <h3 class="text-lg font-semibold text-gray-900" id="formModalTitle">
+              Add User
+            </h3>
+          </div>
+
+          <!-- Modal body -->
+          <form class="p-4 md:p-5" id="postForm">
+            <!-- Title -->
+            <div class="mb-4">
+              <label
+                for="title"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Title</label
+              >
+              <input
+                type="text"
+                id="title"
+                placeholder="Title"
+                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
+                required
+              />
+            </div>
+
+            <!-- Content -->
+            <div class="mb-4">
+              <label
+                for="content"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Content</label
+              >
+              <textarea
+                id="content"
+                placeholder="Content"
+                rows="4"
+                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Status -->
+            <div class="mb-4">
+              <label
+                for="status"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Status</label
+              >
+              <select
+                id="status"
+                class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
+                required
+              >
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+
+            <!-- Views (hidden, default 0 or from DB when edit) -->
+            <input type="hidden" id="views" value="0" />
+
+            <!-- Created At (read-only, hanya tampil saat edit) -->
+            <div class="mb-4 hidden" id="createdAtWrapper">
+              <label
+                for="created_at"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Created At</label
+              >
+              <input
+                type="text"
+                id="created_at"
+                readonly
+                class="w-full p-2 border rounded-lg text-sm text-gray-500 bg-gray-100 border-gray-300"
+              />
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-end space-x-2">
+              <button
+                type="button"
+                id="cancelForm"
+                data-modal-toggle="formModal"
+                class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                <svg
+                  class="me-1 -ms-1 w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/user.js') }}"></script>
+  </body>
+</html>
