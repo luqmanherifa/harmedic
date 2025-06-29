@@ -4,13 +4,13 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from app.models import User
 from werkzeug.security import check_password_hash
 
-auth = Blueprint(
+auth_bp = Blueprint(
     'auth',
     __name__,
     template_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates')
 )
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user' in session:
         return redirect(url_for('pages.dashboard'))
@@ -30,7 +30,7 @@ def login():
 
     return render_template('login.html', error=error)
 
-@auth.route('/logout')
+@auth_bp.route('/logout')
 def logout():
     session.pop('user', None)
     return redirect(url_for('auth.login'))

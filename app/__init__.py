@@ -12,11 +12,11 @@ def create_app():
     from .routes.pages_routes import pages
     from .routes.post_routes import posts_bp
     from .routes.user_routes import users_bp
-    from .routes.auth import auth  # auth tetap seperti semula
+    from .routes.auth_routes import auth_bp
 
     app.register_blueprint(pages)
     app.register_blueprint(posts_bp)
     app.register_blueprint(users_bp)
-    app.register_blueprint(auth)
+    app.register_blueprint(auth_bp)
 
     return app
