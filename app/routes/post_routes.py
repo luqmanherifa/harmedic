@@ -25,11 +25,13 @@ def add_post():
     image_file = request.files.get('image')
     image_filename = None
 
+    # Save uploaded image file
     if image_file and image_file.filename != '':
         image_filename = secure_filename(image_file.filename)
         upload_path = os.path.join('app', 'static', 'uploads', image_filename)
         image_file.save(upload_path)
 
+    # Create new post instance
     post = Post(
         title=title,
         content=content,
@@ -50,6 +52,7 @@ def get_posts():
     role = session.get('role')
     user_id = session.get('user_id')
 
+    # Filter by author role
     if role == 'author':
         posts = Post.query.filter_by(author_id=user_id).all()
     else:
@@ -77,9 +80,11 @@ def search_posts():
 
     posts_query = db.session.query(Post)
 
+    # Restrict author search scope
     if role == 'author':
         posts_query = posts_query.filter(Post.author_id == user_id)
 
+    # Search multiple post fields
     posts = (
         posts_query
         .filter(
@@ -111,9 +116,12 @@ def search_posts():
 def update_post(id):
     data = request.get_json()
     post = Post.query.get_or_404(id)
+    
+    # Update editable fields
     post.title = data['title']
     post.content = data['content']
     post.status = data.get('status', post.status)
+    
     db.session.commit()
     return jsonify({'message': 'Post updated successfully'})
 
@@ -121,6 +129,9 @@ def update_post(id):
 @posts_bp.route('/delete_post/<int:id>', methods=['DELETE'])
 def delete_post(id):
     post = Post.query.get_or_404(id)
+    
+    # Delete post permanently
     db.session.delete(post)
     db.session.commit()
+    
     return jsonify({'message': 'Post deleted successfully'})

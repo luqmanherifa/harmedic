@@ -13,9 +13,11 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
 
+        # Check username/email duplicate
         if User.query.filter((User.username == username) | (User.email == email)).first():
             return render_template('register.html', error="Username atau email sudah digunakan")
 
+        # Create new user
         user = User(username=username, email=email)
         user.set_password(password)
         db.session.add(user)
@@ -28,6 +30,7 @@ def register():
 # Route Read
 @users_bp.route('/get_users')
 def get_users():
+    # Fetch all users
     users = User.query.all()
     return jsonify({
         'users': [
@@ -45,10 +48,13 @@ def get_users():
 @users_bp.route('/search_users')
 def search_users():
     query = request.args.get('q', '', type=str)
+    
+    # Search by username/email
     users = User.query.filter(
         (User.username.like(f"%{query}%")) |
         (User.email.like(f"%{query}%"))
     ).all()
+    
     return jsonify({
         'users': [
             {
@@ -67,12 +73,15 @@ def update_user(id):
     data = request.get_json()
     user = User.query.get_or_404(id)
     
+    # Update user fields
     user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
     
+    # Update user role
     if 'role' in data:
         user.role = data['role']
         
+        # Sync session role
         if session.get('user_id') == user.id:
             session['role'] = user.role
 
@@ -83,6 +92,9 @@ def update_user(id):
 @users_bp.route('/delete_user/<int:id>', methods=['DELETE'])
 def delete_user(id):
     user = User.query.get_or_404(id)
+    
+    # Delete user permanently
     db.session.delete(user)
     db.session.commit()
+    
     return jsonify({'message': 'User deleted successfully'})

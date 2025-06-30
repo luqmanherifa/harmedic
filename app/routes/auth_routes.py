@@ -14,20 +14,24 @@ auth_bp = Blueprint(
 # Route Login
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    # Redirect if already logged
     if 'user' in session:
         return redirect(url_for('pages.dashboard'))
 
     error = None
+    
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
 
         user = User.query.filter_by(username=username).first()
 
+        # Save user session data
         if user and user.check_password(password):
             session['user'] = user.username
             session['user_id'] = user.id
             session['role'] = user.role
+            
             return redirect(url_for('pages.dashboard'))
         else:
             error = 'Username atau password salah'
@@ -37,7 +41,9 @@ def login():
 # Route Logout
 @auth_bp.route('/logout')
 def logout():
+    # Clear session on logout
     session.pop('user', None)
     session.pop('user_id', None)
     session.pop('role', None)
+    
     return redirect(url_for('auth.login'))
