@@ -1,9 +1,11 @@
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session
-from app.models import User
+from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
+
 from app import db
+from app.models import User
 
 users_bp = Blueprint('users', __name__)
 
+# Route Register
 @users_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -23,6 +25,7 @@ def register():
 
     return render_template('register.html')
 
+# Route Read
 @users_bp.route('/get_users')
 def get_users():
     users = User.query.all()
@@ -38,30 +41,7 @@ def get_users():
         ]
     })
 
-@users_bp.route('/update_user/<int:id>', methods=['PUT'])
-def update_user(id):
-    data = request.get_json()
-    user = User.query.get_or_404(id)
-    
-    user.username = data.get('username', user.username)
-    user.email = data.get('email', user.email)
-    
-    if 'role' in data:
-        user.role = data['role']
-        
-        if session.get('user_id') == user.id:
-            session['role'] = user.role
-
-    db.session.commit()
-    return jsonify({'message': 'User updated successfully'})
-
-@users_bp.route('/delete_user/<int:id>', methods=['DELETE'])
-def delete_user(id):
-    user = User.query.get_or_404(id)
-    db.session.delete(user)
-    db.session.commit()
-    return jsonify({'message': 'User deleted successfully'})
-
+# Route Search
 @users_bp.route('/search_users')
 def search_users():
     query = request.args.get('q', '', type=str)
@@ -80,3 +60,29 @@ def search_users():
             } for u in users
         ]
     })
+
+# Route Update
+@users_bp.route('/update_user/<int:id>', methods=['PUT'])
+def update_user(id):
+    data = request.get_json()
+    user = User.query.get_or_404(id)
+    
+    user.username = data.get('username', user.username)
+    user.email = data.get('email', user.email)
+    
+    if 'role' in data:
+        user.role = data['role']
+        
+        if session.get('user_id') == user.id:
+            session['role'] = user.role
+
+    db.session.commit()
+    return jsonify({'message': 'User updated successfully'})
+
+# Route Delete
+@users_bp.route('/delete_user/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.get_or_404(id)
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({'message': 'User deleted successfully'})

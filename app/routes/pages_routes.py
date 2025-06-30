@@ -1,7 +1,9 @@
 import os
-from flask import Blueprint, render_template, redirect, url_for, session, request, jsonify
-from app.models import Post
+
+from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
+
 from app import db
+from app.models import Post
 
 pages = Blueprint(
     'pages',
@@ -9,22 +11,7 @@ pages = Blueprint(
     template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'templates'))
 )
 
-@pages.route('/dashboard')
-def dashboard():
-    if 'user' not in session:
-        return redirect(url_for('auth.login'))
-
-    if session.get('role') not in ['admin', 'author']:
-        return redirect(url_for('pages.home'))
-
-    return render_template('dashboard.html')
-
-@pages.route('/user')
-def user():
-    if 'user' not in session or session.get('role') != 'admin':
-        return redirect(url_for('auth.login'))
-    return render_template('user.html')
-
+# Route Public Pages
 @pages.route('/')
 def home():
     posts = Post.query.filter_by(status='approved').all()
@@ -60,3 +47,20 @@ def search_home_posts():
             for post in posts
         ]
     })
+
+# Route Session Pages
+@pages.route('/dashboard')
+def dashboard():
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+
+    if session.get('role') not in ['admin', 'author']:
+        return redirect(url_for('pages.home'))
+
+    return render_template('dashboard.html')
+
+@pages.route('/user')
+def user():
+    if 'user' not in session or session.get('role') != 'admin':
+        return redirect(url_for('auth.login'))
+    return render_template('user.html')

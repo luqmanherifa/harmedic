@@ -1,7 +1,9 @@
 import os
+
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from app.models import User
 from werkzeug.security import check_password_hash
+
+from app.models import User
 
 auth_bp = Blueprint(
     'auth',
@@ -9,6 +11,7 @@ auth_bp = Blueprint(
     template_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates')
 )
 
+# Route Login
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user' in session:
@@ -31,6 +34,7 @@ def login():
 
     return render_template('login.html', error=error)
 
+# Route Logout
 @auth_bp.route('/logout')
 def logout():
     session.pop('user', None)

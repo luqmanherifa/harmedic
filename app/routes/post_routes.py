@@ -1,17 +1,17 @@
-from flask import Blueprint, request, jsonify
-from app.models import Post
-from app import db
-from sqlalchemy import cast, String
-from datetime import datetime
 import os
+from datetime import datetime
+
+from flask import Blueprint, request, jsonify, session, current_app
 from werkzeug.utils import secure_filename
-from flask import current_app
-from flask import Blueprint, request, jsonify, session
+from sqlalchemy import cast, String
 from sqlalchemy.orm import joinedload
+
+from app import db
 from app.models import Post, User
 
 posts_bp = Blueprint('posts', __name__)
 
+# Route Create
 @posts_bp.route('/add_post', methods=['POST'])
 def add_post():
     if 'user_id' not in session:
@@ -44,6 +44,7 @@ def add_post():
 
     return jsonify({'message': 'Post added successfully'})
 
+# Route Read
 @posts_bp.route('/get_posts')
 def get_posts():
     role = session.get('role')
@@ -67,23 +68,7 @@ def get_posts():
         } for p in posts]
     })
 
-@posts_bp.route('/update_post/<int:id>', methods=['PUT'])
-def update_post(id):
-    data = request.get_json()
-    post = Post.query.get_or_404(id)
-    post.title = data['title']
-    post.content = data['content']
-    post.status = data.get('status', post.status)
-    db.session.commit()
-    return jsonify({'message': 'Post updated successfully'})
-
-@posts_bp.route('/delete_post/<int:id>', methods=['DELETE'])
-def delete_post(id):
-    post = Post.query.get_or_404(id)
-    db.session.delete(post)
-    db.session.commit()
-    return jsonify({'message': 'Post deleted successfully'})
-
+# Route Search
 @posts_bp.route('/search_posts')
 def search_posts():
     query = request.args.get('q', '', type=str)
@@ -120,3 +105,22 @@ def search_posts():
             'image': f'/static/uploads/{p.image}' if p.image else None
         } for p in posts]
     })
+
+# Route Update
+@posts_bp.route('/update_post/<int:id>', methods=['PUT'])
+def update_post(id):
+    data = request.get_json()
+    post = Post.query.get_or_404(id)
+    post.title = data['title']
+    post.content = data['content']
+    post.status = data.get('status', post.status)
+    db.session.commit()
+    return jsonify({'message': 'Post updated successfully'})
+
+# Route Delete
+@posts_bp.route('/delete_post/<int:id>', methods=['DELETE'])
+def delete_post(id):
+    post = Post.query.get_or_404(id)
+    db.session.delete(post)
+    db.session.commit()
+    return jsonify({'message': 'Post deleted successfully'})
