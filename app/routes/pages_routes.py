@@ -1,6 +1,6 @@
 # app/routes/pages_routes.py
 import os
-from flask import Blueprint, render_template, redirect, url_for, session
+from flask import Blueprint, render_template, redirect, url_for, session, request, jsonify
 from app.models import Post
 from app import db
 
@@ -34,3 +34,26 @@ def post_detail(id):
         post.views += 1
         db.session.commit()
     return render_template('post_detail.html', post=post)
+
+@pages.route('/search_home_posts')
+def search_home_posts():
+    query = request.args.get('q', '', type=str)
+    posts = Post.query.filter(
+        Post.status == 'approved',
+        (Post.title.ilike(f'%{query}%')) | (Post.content.ilike(f'%{query}%'))
+    ).order_by(Post.created_at.desc()).all()
+
+    return jsonify({
+        "posts": [
+            {
+                "id": post.id,
+                "title": post.title,
+                "content": post.content,
+                "created_at": post.created_at.strftime('%B %d, %Y'),
+                "views": post.views,
+                "image": post.image,
+                "author": post.author.username if post.author else "Unknown",
+            }
+            for post in posts
+        ]
+    })

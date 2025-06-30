@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Harmedic Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
@@ -69,3 +70,66 @@
     {% include 'partials/footer.html' %}
   </body>
 </html>
+
+<script>
+  $(document).ready(function () {
+    $("#search-article").on("input", function () {
+      const query = $(this).val().trim();
+      if (query.length === 0) {
+        location.reload(); // reload ulang untuk tampilkan semua
+        return;
+      }
+
+      $.get("/search_home_posts", { q: query }, function (data) {
+        const posts = data.posts;
+        let html = "";
+
+        if (posts.length === 0) {
+          html = `
+            <div class="col-span-full text-center text-red-600 text-lg font-medium py-10">
+              Tidak ada postingan ditemukan.
+            </div>`;
+        } else {
+          html = posts
+            .map(
+              (post) => `
+            <a href="/post/${post.id}"
+              class="group cursor-pointer rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition-all"
+            >
+              <img
+                class="w-[410px] h-[308px] object-cover rounded-b-none rounded-t-lg"
+                src="${
+                  post.image
+                    ? `/static/uploads/${post.image}`
+                    : "/static/images/harmedic.png"
+                }"
+                alt="${post.title}"
+              />
+              <div class="p-5">
+                <h2 class="line-clamp-2 text-lg font-semibold text-gray-600 group-hover:text-blue-800">
+                  ${post.title}
+                </h2>
+                <p class="mt-2 line-clamp-3 text-xs font-normal text-gray-600">
+                  <span class="text-gray-400 flex items-center text-sm">
+                    <span>${post.author}</span>
+                    <span class="mx-2">•</span>
+                    <span>${post.created_at}</span>
+                    <span class="mx-2">•</span>
+                    <span>${post.views} views</span>
+                  </span>
+                </p>
+                <p class="mt-2 line-clamp-3 text-base font-normal text-gray-600">
+                  ${post.content}
+                </p>
+              </div>
+            </a>
+          `
+            )
+            .join("");
+        }
+
+        $(".grid.grid-cols-1").html(html);
+      });
+    });
+  });
+</script>
