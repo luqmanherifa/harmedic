@@ -58,7 +58,17 @@ const dom = {
             <td class="px-6 py-4 max-w-[100px]">
               <p class="line-clamp-1">${post.content}</p>
             </td>
-            <td class="px-6 py-4">${post.status}</td> 
+            <td class="px-6 py-4">
+              <span class="${
+                post.status === "approved"
+                  ? "text-green-600 font-semibold"
+                  : post.status === "pending"
+                  ? "text-yellow-600 font-semibold"
+                  : "text-red-600 font-semibold"
+              }">
+                ${post.status}
+              </span>
+            </td>
             <td class="px-6 py-4">${post.views}</td>  
             <td class="px-6 py-4">${post.created_at.split(" ")[0]}</td>
             <td class="px-6 py-4">${post.author}</td>
