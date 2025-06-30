@@ -26,6 +26,7 @@ $(document).ready(function () {
     $("#detailUserId").text(btn.data("id"));
     $("#detailUsername").text(btn.data("username"));
     $("#detailEmail").text(btn.data("email"));
+    $("#detailRole").text(btn.data("role"));
     $("#detailUserCreatedAt").text(btn.data("created_at").split(" ")[0]);
 
     $("#userDetailModal").removeClass("hidden").addClass("flex");
@@ -44,6 +45,7 @@ $(document).ready(function () {
     $("#editUserId").val(btn.data("id"));
     $("#editUsername").val(btn.data("username"));
     $("#editEmail").val(btn.data("email"));
+    $("#editRole").val(btn.data("role")); // ← role dimuat ke select
     $("#editCreatedAt").val(btn.data("created_at").split(" ")[0]);
 
     $("#userFormModal").removeClass("hidden").addClass("flex");
@@ -53,6 +55,9 @@ $(document).ready(function () {
     $("#userFormModal").addClass("hidden").removeClass("flex");
   });
 
+  // =============================
+  // Submit Edit User Form
+  // =============================
   $("#userForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -60,6 +65,7 @@ $(document).ready(function () {
     const updatedData = {
       username: $("#editUsername").val(),
       email: $("#editEmail").val(),
+      role: $("#editRole").val(), // ← role dikirim ke backend
     };
 
     api

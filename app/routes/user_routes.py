@@ -33,6 +33,7 @@ def get_users():
                 'id': u.id,
                 'username': u.username,
                 'email': u.email,
+                'role': u.role,
                 'created_at': u.created_at.strftime('%Y-%m-%d %H:%M:%S')
             } for u in users
         ]
@@ -44,6 +45,10 @@ def update_user(id):
     user = User.query.get_or_404(id)
     user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
+    
+    if 'role' in data:
+        user.role = data['role']  # ✅ tambahkan baris ini
+
     db.session.commit()
     return jsonify({'message': 'User updated successfully'})
 
@@ -67,6 +72,7 @@ def search_users():
                 'id': u.id,
                 'username': u.username,
                 'email': u.email,
+                'role': u.role, 
                 'created_at': u.created_at.strftime('%Y-%m-%d %H:%M:%S')
             } for u in users
         ]

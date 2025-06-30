@@ -134,6 +134,7 @@ const dom = {
               </th>
               <td class="px-6 py-4">${user.username}</td>
               <td class="px-6 py-4">${user.email}</td>
+              <td class="px-6 py-4">${user.role}</td>
               <td class="px-6 py-4">${user.created_at.split(" ")[0]}</td>
               <td class="px-0 py-4">
                 <button
@@ -141,6 +142,7 @@ const dom = {
                   data-id="${user.id}"
                   data-username="${user.username}"
                   data-email="${user.email}"
+                  data-role="${user.role}"
                   data-created_at="${user.created_at}"
                 >Detail</button>
               </td>
@@ -150,6 +152,7 @@ const dom = {
                   data-id="${user.id}"
                   data-username="${user.username}"
                   data-email="${user.email}"
+                  data-role="${user.role}"
                   data-created_at="${user.created_at}"
                 >Edit</button>
               </td>

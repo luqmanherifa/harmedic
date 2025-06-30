@@ -3,6 +3,7 @@ from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
+from sqlalchemy import Enum
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -29,6 +30,11 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
+    role = db.Column(
+        Enum('admin', 'author', 'visitor', name='user_roles'),
+        default='visitor',
+        nullable=False
+    )
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def set_password(self, password):
