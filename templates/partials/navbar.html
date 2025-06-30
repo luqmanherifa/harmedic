@@ -18,7 +18,8 @@
     <div class="flex gap-3">
       {% if session.get('user') %}
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        {% if request.path.startswith('/dashboard') or
+        {% if session.get('role') in ['admin', 'author'] %} {% if
+        request.path.startswith('/dashboard') or
         request.path.startswith('/user') %}
         <!-- Sedang di halaman dashboard/user, tampilkan tombol Home -->
         <a
@@ -35,7 +36,7 @@
         >
           Dashboard
         </a>
-        {% endif %}
+        {% endif %} {% endif %}
       </div>
 
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">

@@ -47,7 +47,14 @@ def add_post():
 
 @posts_bp.route('/get_posts')
 def get_posts():
-    posts = Post.query.all()
+    role = session.get('role')
+    user_id = session.get('user_id')
+
+    if role == 'author':
+        posts = Post.query.filter_by(author_id=user_id).all()
+    else:
+        posts = Post.query.all()
+
     return jsonify({
         'posts': [{
             'id': p.id,
@@ -81,19 +88,27 @@ def delete_post(id):
 @posts_bp.route('/search_posts')
 def search_posts():
     query = request.args.get('q', '', type=str)
+    role = session.get('role')
+    user_id = session.get('user_id')
 
+    # Base query
+    posts_query = db.session.query(Post)
+
+    # Jika role author, filter hanya post miliknya
+    if role == 'author':
+        posts_query = posts_query.filter(Post.author_id == user_id)
+
+    # Tambahkan pencarian
     posts = (
-        db.session.query(Post)
-        .join(User)
+        posts_query
         .filter(
             (Post.title.ilike(f"%{query}%")) |
             (Post.content.ilike(f"%{query}%")) |
             (Post.status.ilike(f"%{query}%")) |
             (cast(Post.views, String).ilike(f"%{query}%")) |
-            (cast(Post.created_at, String).ilike(f"%{query}%")) |
-            (User.username.ilike(f"%{query}%"))  # ← Tambahkan filter author
+            (cast(Post.created_at, String).ilike(f"%{query}%"))
         )
-        .options(joinedload(Post.author))  # untuk menghindari N+1
+        .options(joinedload(Post.author))  # hindari N+1 query
         .all()
     )
 
