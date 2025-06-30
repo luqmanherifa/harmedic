@@ -1,10 +1,11 @@
 from datetime import datetime
+
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-from sqlalchemy import ForeignKey
-from sqlalchemy import Enum
+from sqlalchemy import ForeignKey, Enum
 
+# Post Model
 class Post(db.Model):
     __tablename__ = 'posts'
     
@@ -16,12 +17,14 @@ class Post(db.Model):
     status = db.Column(db.Enum('pending', 'approved', 'rejected', name='post_status'), default='pending', nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
+    # Foreign key to User
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     author = relationship('User', backref='posts')
 
     def __repr__(self):
         return f'<Post {self.title}>'
 
+# User Model
 class User(db.Model):
     __tablename__ = 'users'
     
@@ -37,11 +40,11 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def set_password(self, password):
-        """Hash dan simpan password"""
+        """Hash and save password"""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        """Cek apakah password cocok dengan hash"""
+        """Check password against hash"""
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):

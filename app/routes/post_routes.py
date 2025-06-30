@@ -44,7 +44,7 @@ def add_post():
     db.session.add(post)
     db.session.commit()
 
-    return jsonify({'message': 'Post added successfully'})
+    return jsonify({'message': 'Post added successfully.'})
 
 # Route Read
 @posts_bp.route('/get_posts')
@@ -123,7 +123,7 @@ def update_post(id):
     post.status = data.get('status', post.status)
     
     db.session.commit()
-    return jsonify({'message': 'Post updated successfully'})
+    return jsonify({'message': 'Post updated successfully.'})
 
 # Route Delete
 @posts_bp.route('/delete_post/<int:id>', methods=['DELETE'])
@@ -134,4 +134,4 @@ def delete_post(id):
     db.session.delete(post)
     db.session.commit()
     
-    return jsonify({'message': 'Post deleted successfully'})
+    return jsonify({'message': 'Post deleted successfully.'})

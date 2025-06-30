@@ -86,7 +86,7 @@ def update_user(id):
             session['role'] = user.role
 
     db.session.commit()
-    return jsonify({'message': 'User updated successfully'})
+    return jsonify({'message': 'User updated successfully.'})
 
 # Route Delete
 @users_bp.route('/delete_user/<int:id>', methods=['DELETE'])
@@ -97,4 +97,4 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     
-    return jsonify({'message': 'User deleted successfully'})
+    return jsonify({'message': 'User deleted successfully.'})

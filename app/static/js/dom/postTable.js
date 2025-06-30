@@ -5,7 +5,7 @@ const postTable = {
         ? `
       <tr>
         <td colspan="10" class="text-center text-red-600 font-medium py-4">
-          Tidak ada data ditemukan.
+          No posts found.
         </td>
       </tr>
     `

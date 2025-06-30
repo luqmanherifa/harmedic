@@ -3,7 +3,7 @@ const homePosts = {
     const html =
       posts.length === 0
         ? `<div class="col-span-full text-center text-red-600 text-lg font-medium py-10">
-           Tidak ada postingan ditemukan.
+           No posts found.
          </div>`
         : posts
             .map(

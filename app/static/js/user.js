@@ -24,7 +24,7 @@ $(document).ready(function () {
         loadUsers();
       })
       .catch(() => {
-        alert("Gagal memperbarui data user.");
+        alert("Failed to update user data.");
       });
   });
 
@@ -49,11 +49,11 @@ $(document).ready(function () {
   // Delete user action
   $("#postTable").on("click", ".user-delete-btn", function () {
     const id = $(this).data("id");
-    if (confirm("Yakin ingin menghapus user ini?")) {
+    if (confirm("Confirm delete user?")) {
       api
         .deleteUser(id)
         .then(() => loadUsers())
-        .catch(() => alert("Gagal menghapus user."));
+        .catch(() => alert("Failed to delete user."));
     }
   });
 

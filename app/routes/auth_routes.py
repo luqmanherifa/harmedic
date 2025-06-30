@@ -34,7 +34,7 @@ def login():
             
             return redirect(url_for('pages.dashboard'))
         else:
-            error = 'Username atau password salah'
+            error = 'Incorrect username or password.'
 
     return render_template('login.html', error=error)
 

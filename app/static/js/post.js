@@ -93,11 +93,11 @@ $(document).ready(function () {
   // Delete post action
   $("#postTable").on("click", ".delete-btn", function () {
     const id = $(this).data("id");
-    if (confirm("Yakin ingin menghapus post ini?")) {
+    if (confirm("Confirm delete post?")) {
       api
         .deletePost(id)
         .then(() => loadPosts())
-        .catch(() => alert("Gagal menghapus post."));
+        .catch(() => alert("Failed to delete post."));
     }
   });
 
