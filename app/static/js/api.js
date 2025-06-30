@@ -1,7 +1,13 @@
 const api = {
-  // Posts
+  // --- POSTS API ---
+  // Get Posts
   getPosts: () => $.get("/get_posts"),
 
+  // Search Posts
+  searchPosts: (query) => $.get("/search_posts", { q: query }),
+  searchHomePosts: (query) => $.get("/search_home_posts", { q: query }),
+
+  // Add Post
   addPost: (data) =>
     $.ajax({
       url: "/add_post",
@@ -11,6 +17,7 @@ const api = {
       data: JSON.stringify(data),
     }),
 
+  // Update Post
   updatePost: (id, data) =>
     $.ajax({
       url: `/update_post/${id}`,
@@ -20,21 +27,21 @@ const api = {
       data: JSON.stringify(data),
     }),
 
+  // Delete Post
   deletePost: (id) =>
     $.ajax({
       url: `/delete_post/${id}`,
       type: "DELETE",
     }),
 
-  searchPosts: (query) => $.get("/search_posts", { q: query }),
-
-  searchHomePosts: (query) => $.get("/search_home_posts", { q: query }),
-
-  // Users
+  // --- USERS API ---
+  // Get Users
   getUsers: () => $.get("/get_users"),
 
+  // Search Users
   searchUsers: (query) => $.get("/search_users", { q: query }),
 
+  // Update User
   updateUser: (id, data) =>
     $.ajax({
       url: `/update_user/${id}`,
@@ -44,6 +51,7 @@ const api = {
       data: JSON.stringify(data),
     }),
 
+  // Delete User
   deleteUser: (id) =>
     $.ajax({
       url: `/delete_user/${id}`,

@@ -1,36 +1,8 @@
 $(document).ready(function () {
-  function loadPosts() {
-    api.getPosts().then((data) => dom.renderTable(data.posts));
-  }
-
   loadPosts();
 
-  // Add Post Button
-  $("#openAddModal").on("click", function () {
-    dom.resetForm();
-    $("#formModalTitle").text("Add Post");
-    $("#postForm button[type='submit']")
-      .text("Save")
-      .removeClass()
-      .addClass(
-        "text-white inline-flex items-center bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-      );
-    $("#cancelForm")
-      .text("Cancel")
-      .removeClass()
-      .addClass(
-        "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-      );
-    $("#formModal").removeClass("hidden").addClass("flex");
-
-    $("#imageWrapper").show();
-  });
-
-  $("#cancelForm").on("click", function () {
-    $("#formModal").addClass("hidden").removeClass("flex");
-  });
-
-  // Submit Post Form
+  // --- FORM ---
+  // Submit form action
   $("#postForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -63,7 +35,34 @@ $(document).ready(function () {
       });
   });
 
-  // Edit Post Button
+  // Cancel form modal
+  $("#cancelForm").on("click", function () {
+    $("#formModal").addClass("hidden").removeClass("flex");
+  });
+
+  // --- FORM BUTTONS ---
+  // Open add modal
+  $("#openAddModal").on("click", function () {
+    dom.resetForm();
+    $("#formModalTitle").text("Add Post");
+    $("#postForm button[type='submit']")
+      .text("Save")
+      .removeClass()
+      .addClass(
+        "text-white inline-flex items-center bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      );
+    $("#cancelForm")
+      .text("Cancel")
+      .removeClass()
+      .addClass(
+        "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      );
+    $("#formModal").removeClass("hidden").addClass("flex");
+
+    $("#imageWrapper").show();
+  });
+
+  // Edit post modal
   $("#postTable").on("click", ".edit-btn", function () {
     const btn = $(this);
     dom.fillForm({
@@ -91,7 +90,7 @@ $(document).ready(function () {
     $("#imageWrapper").hide();
   });
 
-  // Delete Post Button
+  // Delete post action
   $("#postTable").on("click", ".delete-btn", function () {
     const id = $(this).data("id");
     if (confirm("Yakin ingin menghapus post ini?")) {
@@ -102,7 +101,7 @@ $(document).ready(function () {
     }
   });
 
-  // Detail Post Button
+  // View post detail
   $("#postTable").on("click", ".detail-btn", function () {
     const btn = $(this);
     $("#detailId").text(btn.data("id"));
@@ -128,11 +127,13 @@ $(document).ready(function () {
     $("#detailModal").removeClass("hidden").addClass("flex");
   });
 
+  // Close detail modal
   $("#closeModal").on("click", function () {
     $("#detailModal").addClass("hidden").removeClass("flex");
   });
 
-  // Search Post Input
+  // --- SEARCH ---
+  // Search input event
   $("#searchInput").on("input", function () {
     const query = $(this).val().trim();
     if (query.length > 0) {
@@ -141,4 +142,8 @@ $(document).ready(function () {
       loadPosts();
     }
   });
+
+  function loadPosts() {
+    api.getPosts().then((data) => dom.renderTable(data.posts));
+  }
 });
