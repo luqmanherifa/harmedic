@@ -49,10 +49,11 @@ def get_users():
 def search_users():
     query = request.args.get('q', '', type=str)
     
-    # Search by username/email
+    # Search by username, email, or role
     users = User.query.filter(
-        (User.username.like(f"%{query}%")) |
-        (User.email.like(f"%{query}%"))
+        (User.username.ilike(f"%{query}%")) |
+        (User.email.ilike(f"%{query}%")) |
+        (User.role.ilike(f"%{query}%"))
     ).all()
     
     return jsonify({
@@ -61,7 +62,7 @@ def search_users():
                 'id': u.id,
                 'username': u.username,
                 'email': u.email,
-                'role': u.role, 
+                'role': u.role,
                 'created_at': u.created_at.strftime('%Y-%m-%d %H:%M:%S')
             } for u in users
         ]
