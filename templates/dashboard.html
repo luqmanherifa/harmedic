@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Harmedic Dashboard</title>
+    <title>Harmedic Post Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link
@@ -24,21 +24,21 @@
     <!-- Navbar -->
     {% include 'partials/navbar.html' %}
 
-    <!-- Dashboard -->
+    <!-- Dashboard Aside -->
     {% include 'partials/dashboard_aside.html' %}
 
     <div class="px-10 py-4 pr-36 sm:ml-80 bg-white">
       <div class="rounded-lg">
         <h1 class="text-2xl font-bold mb-4">Post Dashboard</h1>
         <div class="flex justify-between items-center mb-4 gap-4">
-          <!-- Search Input -->
+          <!-- Search -->
           {% include 'partials/dashboard_search.html' %}
 
-          <!-- Tombol Add Post -->
+          <!-- Button Add Post -->
           {% include 'partials/post_btn_add.html' %}
         </div>
 
-        <!-- Tabel Post -->
+        <!-- Table Posts -->
         <div
           class="relative overflow-x-auto border border-gray-300 sm:rounded-xl"
         >
@@ -62,14 +62,14 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Data akan diisi oleh jQuery -->
+              <!-- Data handled by jQuery -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- Modal Detail -->
+    <!-- Modal Detail Post -->
     {% include 'partials/post_modal_detail.html' %}
 
     <!-- Modal Add/Edit Post -->
