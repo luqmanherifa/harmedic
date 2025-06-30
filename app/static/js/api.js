@@ -1,5 +1,5 @@
 const api = {
-  // ====== POST ======
+  // Posts
   getPosts: () => $.get("/get_posts"),
 
   addPost: (data) =>
@@ -30,7 +30,7 @@ const api = {
 
   searchHomePosts: (query) => $.get("/search_home_posts", { q: query }),
 
-  // ====== USER ======
+  // Users
   getUsers: () => $.get("/get_users"),
 
   searchUsers: (query) => $.get("/search_users", { q: query }),

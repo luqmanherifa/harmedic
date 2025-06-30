@@ -16,9 +16,8 @@ class Post(db.Model):
     status = db.Column(db.Enum('pending', 'approved', 'rejected', name='post_status'), default='pending', nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # Foreign key ke User
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    author = relationship('User', backref='posts')  # akses: post.author.username
+    author = relationship('User', backref='posts')
 
     def __repr__(self):
         return f'<Post {self.title}>'

@@ -5,6 +5,7 @@ $(document).ready(function () {
 
   loadPosts();
 
+  // Add Post Button
   $("#openAddModal").on("click", function () {
     dom.resetForm();
     $("#formModalTitle").text("Add Post");
@@ -29,6 +30,7 @@ $(document).ready(function () {
     $("#formModal").addClass("hidden").removeClass("flex");
   });
 
+  // Submit Post Form
   $("#postForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -61,6 +63,7 @@ $(document).ready(function () {
       });
   });
 
+  // Edit Post Button
   $("#postTable").on("click", ".edit-btn", function () {
     const btn = $(this);
     dom.fillForm({
@@ -88,6 +91,7 @@ $(document).ready(function () {
     $("#imageWrapper").hide();
   });
 
+  // Delete Post Button
   $("#postTable").on("click", ".delete-btn", function () {
     const id = $(this).data("id");
     if (confirm("Yakin ingin menghapus post ini?")) {
@@ -98,6 +102,7 @@ $(document).ready(function () {
     }
   });
 
+  // Detail Post Button
   $("#postTable").on("click", ".detail-btn", function () {
     const btn = $(this);
     $("#detailId").text(btn.data("id"));
@@ -127,6 +132,7 @@ $(document).ready(function () {
     $("#detailModal").addClass("hidden").removeClass("flex");
   });
 
+  // Search Post Input
   $("#searchInput").on("input", function () {
     const query = $(this).val().trim();
     if (query.length > 0) {

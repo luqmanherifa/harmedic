@@ -1,4 +1,3 @@
-# app/routes/user_routes.py
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session
 from app.models import User
 from app import db
@@ -50,9 +49,8 @@ def update_user(id):
     if 'role' in data:
         user.role = data['role']
         
-        # Jika user yang diubah adalah user yang sedang login, update session
         if session.get('user_id') == user.id:
-            session['role'] = user.role  # ✅ update session['role']
+            session['role'] = user.role
 
     db.session.commit()
     return jsonify({'message': 'User updated successfully'})

@@ -1,4 +1,3 @@
-# app/routes/pages_routes.py
 import os
 from flask import Blueprint, render_template, redirect, url_for, session, request, jsonify
 from app.models import Post
@@ -15,7 +14,6 @@ def dashboard():
     if 'user' not in session:
         return redirect(url_for('auth.login'))
 
-    # Batasi hanya admin dan author
     if session.get('role') not in ['admin', 'author']:
         return redirect(url_for('pages.home'))
 

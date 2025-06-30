@@ -1,4 +1,3 @@
-# app/routes/post_routes.py
 from flask import Blueprint, request, jsonify
 from app.models import Post
 from app import db
@@ -18,7 +17,7 @@ def add_post():
     if 'user_id' not in session:
         return jsonify({'error': 'Unauthorized'}), 401
 
-    user_id = session['user_id']  # ← ambil id user dari session
+    user_id = session['user_id']
 
     title = request.form.get('title')
     content = request.form.get('content')
@@ -37,7 +36,7 @@ def add_post():
         image=image_filename,
         status=status,
         views=0,
-        author_id=user_id  # ← inilah yang wajib
+        author_id=user_id
     )
 
     db.session.add(post)
@@ -91,14 +90,11 @@ def search_posts():
     role = session.get('role')
     user_id = session.get('user_id')
 
-    # Base query
     posts_query = db.session.query(Post)
 
-    # Jika role author, filter hanya post miliknya
     if role == 'author':
         posts_query = posts_query.filter(Post.author_id == user_id)
 
-    # Tambahkan pencarian
     posts = (
         posts_query
         .filter(
@@ -108,7 +104,7 @@ def search_posts():
             (cast(Post.views, String).ilike(f"%{query}%")) |
             (cast(Post.created_at, String).ilike(f"%{query}%"))
         )
-        .options(joinedload(Post.author))  # hindari N+1 query
+        .options(joinedload(Post.author))
         .all()
     )
 

@@ -8,7 +8,6 @@ def create_app():
     app.config.from_object('config.Config')
     db.init_app(app)
 
-    # Register semua blueprint
     from .routes.pages_routes import pages
     from .routes.post_routes import posts_bp
     from .routes.user_routes import users_bp

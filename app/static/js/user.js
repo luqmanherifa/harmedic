@@ -5,9 +5,7 @@ $(document).ready(function () {
 
   loadUsers();
 
-  // =============================
-  // Search Users
-  // =============================
+  // Search User Input
   $("#searchInput").on("input", function () {
     const query = $(this).val().trim();
     if (query.length > 0) {
@@ -17,9 +15,7 @@ $(document).ready(function () {
     }
   });
 
-  // =============================
-  // Detail User Modal
-  // =============================
+  // Detail User Button
   $("#postTable").on("click", ".user-detail-btn", function () {
     const btn = $(this);
 
@@ -36,16 +32,14 @@ $(document).ready(function () {
     $("#userDetailModal").addClass("hidden").removeClass("flex");
   });
 
-  // =============================
-  // Edit User Modal
-  // =============================
+  // Edit User Button
   $("#postTable").on("click", ".user-edit-btn", function () {
     const btn = $(this);
 
     $("#editUserId").val(btn.data("id"));
     $("#editUsername").val(btn.data("username"));
     $("#editEmail").val(btn.data("email"));
-    $("#editRole").val(btn.data("role")); // ← role dimuat ke select
+    $("#editRole").val(btn.data("role"));
 
     $("#userFormModal").removeClass("hidden").addClass("flex");
   });
@@ -54,9 +48,7 @@ $(document).ready(function () {
     $("#userFormModal").addClass("hidden").removeClass("flex");
   });
 
-  // =============================
-  // Submit Edit User Form
-  // =============================
+  // Submit User Form
   $("#userForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -64,7 +56,7 @@ $(document).ready(function () {
     const updatedData = {
       username: $("#editUsername").val(),
       email: $("#editEmail").val(),
-      role: $("#editRole").val(), // ← role dikirim ke backend
+      role: $("#editRole").val(),
     };
 
     api
@@ -72,20 +64,17 @@ $(document).ready(function () {
       .then(() => {
         $("#userFormModal").addClass("hidden").removeClass("flex");
 
-        // 👇 Tambahkan 2 baris ini
-        const currentUserId = $("#currentUserId").val(); // dari input hidden
-        if (id === currentUserId) return location.reload(); // reload jika user sedang edit dirinya sendiri
+        const currentUserId = $("#currentUserId").val();
+        if (id === currentUserId) return location.reload();
 
-        loadUsers(); // tetap load ulang user lain
+        loadUsers();
       })
       .catch(() => {
         alert("Gagal memperbarui data user.");
       });
   });
 
-  // =============================
-  // Delete User
-  // =============================
+  // Delete User Button
   $("#postTable").on("click", ".user-delete-btn", function () {
     const id = $(this).data("id");
     if (confirm("Yakin ingin menghapus user ini?")) {
