@@ -112,7 +112,13 @@ $(document).ready(function () {
     const imageUrl = image
       ? `/static/uploads/${image}`
       : "/static/images/harmedic.png";
-    $("#detailImage").attr("src", imageUrl);
+
+    $("#detailImage")
+      .attr("src", imageUrl)
+      .attr(
+        "onerror",
+        "this.onerror=null; this.src='/static/images/harmedic.png';"
+      );
 
     $("#detailModal").removeClass("hidden").addClass("flex");
   });

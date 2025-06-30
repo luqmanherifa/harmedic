@@ -28,6 +28,8 @@ const api = {
 
   searchPosts: (query) => $.get("/search_posts", { q: query }),
 
+  searchHomePosts: (query) => $.get("/search_home_posts", { q: query }),
+
   // ====== USER ======
   getUsers: () => $.get("/get_users"),
 
