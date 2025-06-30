@@ -29,6 +29,7 @@
           class="w-[500px] h-[375px] object-cover rounded-lg"
           src="{{ url_for('static', filename='uploads/' ~ post.image) if post.image else url_for('static', filename='images/harmedic.png') }}"
           alt="{{ post.title }}"
+          onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/harmedic.png') }}';"
         />
         <div class="mb-2 mt-4 flex items-center justify-between">
           <p class="text-base font-medium text-gray-600">
