@@ -5,7 +5,7 @@
     <title>Harmedic Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
     <link
@@ -17,6 +17,10 @@
       body {
         font-family: "Nunito", sans-serif;
       }
+
+      .bricolage {
+        font-family: "Bricolage Grotesque", sans-serif;
+      }
     </style>
   </head>
   <body class="bg-gray-50">
@@ -25,7 +29,7 @@
     >
       <a
         href="{{ url_for('pages.home') }}"
-        class="flex items-center mb-6 text-2xl font-bold text-gray-700"
+        class="bricolage flex items-center mb-6 text-2xl font-semibold text-gray-600"
       >
         <img
           class="w-8 h-8 mr-2"
@@ -37,7 +41,7 @@
       <div class="w-full bg-white rounded-lg border md:mt-0 sm:max-w-md xl:p-0">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1
-            class="text-xl font-bold leading-tight tracking-tight text-gray-600 md:text-2xl"
+            class="text-xl font-semibold leading-tight tracking-tight text-gray-600"
           >
             Create a new account
           </h1>
@@ -49,7 +53,7 @@
             <div>
               <label
                 for="username"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block mb-2 text-sm font-medium text-gray-600"
                 >Username</label
               >
               <input
@@ -64,7 +68,7 @@
             <div>
               <label
                 for="email"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block mb-2 text-sm font-medium text-gray-600"
                 >Email</label
               >
               <input
@@ -73,13 +77,13 @@
                 id="email"
                 placeholder="name@company.com"
                 required
-                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg block w-full p-2.5"
               />
             </div>
             <div>
               <label
                 for="password"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block mb-2 text-sm font-medium text-gray-600"
                 >Password</label
               >
               <input
@@ -105,7 +109,7 @@
               <a
                 href="{{ url_for('auth.login') }}"
                 class="font-medium text-blue-600 hover:underline"
-                >Sign in</a
+                >Login</a
               >
             </p>
           </form>

@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
     <link
@@ -17,6 +17,10 @@
     <style>
       body {
         font-family: "Nunito", sans-serif;
+      }
+
+      .bricolage {
+        font-family: "Bricolage Grotesque", sans-serif;
       }
     </style>
   </head>
@@ -29,7 +33,9 @@
 
     <div class="px-10 py-4 pr-36 sm:ml-80 bg-white">
       <div class="rounded-lg">
-        <h1 class="text-2xl font-bold mb-4">Post Dashboard</h1>
+        <h1 class="bricolage text-xl font-semibold mb-4 text-gray-600">
+          Post Dashboard
+        </h1>
         <div class="flex justify-between items-center mb-4 gap-4">
           <!-- Search -->
           {% include 'partials/dashboard_search.html' %}
