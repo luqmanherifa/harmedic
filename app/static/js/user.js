@@ -46,7 +46,6 @@ $(document).ready(function () {
     $("#editUsername").val(btn.data("username"));
     $("#editEmail").val(btn.data("email"));
     $("#editRole").val(btn.data("role")); // ← role dimuat ke select
-    $("#editCreatedAt").val(btn.data("created_at").split(" ")[0]);
 
     $("#userFormModal").removeClass("hidden").addClass("flex");
   });

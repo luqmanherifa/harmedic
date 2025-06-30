@@ -76,16 +76,17 @@
             class="block mb-2 text-sm font-medium text-gray-900"
             >Status</label
           >
-          <select
-            id="status"
-            name="status"
-            class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
-            required
-          >
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-          </select>
+        <select
+          id="status"
+          name="status"
+          class="w-full p-2 border rounded-lg text-sm text-gray-900 bg-gray-50 border-gray-300"
+          required
+          {% if session.get('role') != 'admin' %}disabled{% endif %}
+        >
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
         </div>
 
         <!-- Views (hidden, default 0 or from DB when edit) -->

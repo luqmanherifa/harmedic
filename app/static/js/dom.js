@@ -101,7 +101,7 @@ const dom = {
                 data-created_at="${post.created_at}"
               >Edit</button>
             </td>
-            <td class="px-1 py-4">
+            <td class="px-1 pr-4 py-4">
               <button
                 class="delete-btn font-medium text-red-600 hover:underline"
                 data-id="${post.id}"
