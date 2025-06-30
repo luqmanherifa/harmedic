@@ -5,5 +5,5 @@ app = create_app()
 
 with app.app_context():
     db.create_all()
-    print("Tabel berhasil dibuat di database.")
+    print("Table has been successfully created in the database.")
 
