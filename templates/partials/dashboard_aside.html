@@ -33,6 +33,7 @@
         </a>
       </li>
 
+      {% if session.role == 'admin' %}
       <li>
         <a
           href="{{ url_for('pages.user') }}"
@@ -52,6 +53,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">User</span>
         </a>
       </li>
+      {% endif %}
     </ul>
   </div>
 </aside>

@@ -18,7 +18,7 @@ def dashboard():
 
 @pages.route('/user')
 def user():
-    if 'user' not in session:
+    if 'user' not in session or session.get('role') != 'admin':
         return redirect(url_for('auth.login'))
     return render_template('user.html')
 

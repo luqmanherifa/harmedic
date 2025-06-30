@@ -25,6 +25,7 @@ def login():
         if user and user.check_password(password):
             session['user'] = user.username
             session['user_id'] = user.id
+            session['role'] = user.role  # baris yang baru kamu tambahkan
             return redirect(url_for('pages.dashboard'))
         else:
             error = 'Username atau password salah'
@@ -35,4 +36,5 @@ def login():
 def logout():
     session.pop('user', None)
     session.pop('user_id', None)
+    session.pop('role', None)  # ← Tambahkan ini
     return redirect(url_for('auth.login'))
