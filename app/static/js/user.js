@@ -72,7 +72,12 @@ $(document).ready(function () {
       .updateUser(id, updatedData)
       .then(() => {
         $("#userFormModal").addClass("hidden").removeClass("flex");
-        loadUsers();
+
+        // 👇 Tambahkan 2 baris ini
+        const currentUserId = $("#currentUserId").val(); // dari input hidden
+        if (id === currentUserId) return location.reload(); // reload jika user sedang edit dirinya sendiri
+
+        loadUsers(); // tetap load ulang user lain
       })
       .catch(() => {
         alert("Gagal memperbarui data user.");

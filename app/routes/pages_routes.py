@@ -14,6 +14,11 @@ pages = Blueprint(
 def dashboard():
     if 'user' not in session:
         return redirect(url_for('auth.login'))
+
+    # Batasi hanya admin dan author
+    if session.get('role') not in ['admin', 'author']:
+        return redirect(url_for('pages.home'))
+
     return render_template('dashboard.html')
 
 @pages.route('/user')

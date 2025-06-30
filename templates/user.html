@@ -69,6 +69,8 @@
     <!-- Modal Add/Edit Post -->
     {% include 'partials/user_modal_edit.html' %}
 
+    <input type="hidden" id="currentUserId" value="{{ session.user_id }}" />
+
     <script src="{{ url_for('static', filename='js/api.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom.js') }}"></script>
     <script src="{{ url_for('static', filename='js/user.js') }}"></script>

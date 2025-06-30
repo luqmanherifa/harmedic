@@ -43,11 +43,16 @@ def get_users():
 def update_user(id):
     data = request.get_json()
     user = User.query.get_or_404(id)
+    
     user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
     
     if 'role' in data:
-        user.role = data['role']  # ✅ tambahkan baris ini
+        user.role = data['role']
+        
+        # Jika user yang diubah adalah user yang sedang login, update session
+        if session.get('user_id') == user.id:
+            session['role'] = user.role  # ✅ update session['role']
 
     db.session.commit()
     return jsonify({'message': 'User updated successfully'})
