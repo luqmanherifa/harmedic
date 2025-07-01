@@ -94,8 +94,13 @@ def update_user(id):
 def delete_user(id):
     user = User.query.get_or_404(id)
     
+    current_user_id = session.get('user_id')
+    
     # Delete user permanently
     db.session.delete(user)
     db.session.commit()
+    
+    if user.id == current_user_id:
+        session.clear()
     
     return jsonify({'message': 'User deleted successfully.'})

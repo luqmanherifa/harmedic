@@ -52,7 +52,9 @@ $(document).ready(function () {
     if (confirm("Confirm delete user?")) {
       api
         .deleteUser(id)
-        .then(() => loadUsers())
+        .then(() => {
+          location.reload();
+        })
         .catch(() => alert("Failed to delete user."));
     }
   });
