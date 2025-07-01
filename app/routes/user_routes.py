@@ -15,7 +15,7 @@ def register():
 
         # Check username/email duplicate
         if User.query.filter((User.username == username) | (User.email == email)).first():
-            return render_template('register.html', error="Username atau email sudah digunakan")
+            return render_template('register.html', error="Username or email already in use.")
 
         # Create new user
         user = User(username=username, email=email)
