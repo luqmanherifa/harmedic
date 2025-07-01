@@ -55,7 +55,11 @@ $(document).ready(function () {
         .then(() => {
           location.reload();
         })
-        .catch(() => alert("Failed to delete user."));
+        .catch((xhr) => {
+          const message = xhr.responseJSON?.error || "Failed to delete user.";
+          alert(message);
+          console.error("Delete user failed:", message);
+        });
     }
   });
 
