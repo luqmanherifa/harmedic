@@ -1,7 +1,7 @@
 const form = {
   editingPostId: null,
 
-  // Fill Form Data
+  // When edit button clicked
   fillForm({ id, title, content, status, views }) {
     $("#title").val(title);
     $("#content").val(content);
@@ -9,14 +9,14 @@ const form = {
     $("#views").val(views);
     this.editingPostId = id;
 
-    // Change to update mode
+    // Switch to update mode
     $("#postForm button")
       .text("Update Post")
       .removeClass("bg-blue-600")
       .addClass("bg-green-700");
   },
 
-  // Get form values
+  // On form submit
   getFormData() {
     return {
       title: $("#title").val(),
@@ -26,7 +26,7 @@ const form = {
     };
   },
 
-  // Clear all inputs
+  // After submit or cancel
   resetForm() {
     $("#title").val("");
     $("#content").val("");
@@ -35,7 +35,7 @@ const form = {
     $("#image").val("");
     this.editingPostId = null;
 
-    // Change to add mode
+    // Switch to add mode
     $("#postForm button")
       .text("Add Post")
       .removeClass("bg-green-700")
