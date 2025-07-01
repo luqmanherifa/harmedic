@@ -21,9 +21,6 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     author = relationship('User', backref='posts')
 
-    def __repr__(self):
-        return f'<Post {self.title}>'
-
 # User Model
 class User(db.Model):
     __tablename__ = 'users'
@@ -46,6 +43,3 @@ class User(db.Model):
     def check_password(self, password):
         """Check password against hash"""
         return check_password_hash(self.password_hash, password)
-
-    def __repr__(self):
-        return f'<User {self.username}>'
