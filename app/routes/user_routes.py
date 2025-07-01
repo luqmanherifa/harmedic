@@ -96,6 +96,9 @@ def delete_user(id):
     
     current_user_id = session.get('user_id')
     
+    if user.posts:
+        return jsonify({'error': 'User has posts. Delete them first.'}), 400
+    
     # Delete user permanently
     db.session.delete(user)
     db.session.commit()

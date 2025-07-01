@@ -22,16 +22,16 @@ const postTable = {
             <td class="px-6 py-4 max-w-[100px]">
               <p class="line-clamp-1">${post.content}</p>
             </td>
-            <td class="px-6 py-4">
-              <span class="${
+            <td class="px-6 py-4 text-center">
+              <p class="${
                 post.status === "approved"
-                  ? "text-green-600 font-semibold"
+                  ? "bg-green-600"
                   : post.status === "pending"
-                  ? "text-yellow-600 font-semibold"
-                  : "text-red-600 font-semibold"
-              }">
+                  ? "bg-yellow-600"
+                  : "bg-red-600"
+              } text-white text-xs font-medium px-2 py-1 rounded-full w-[4.5rem] text-center mx-auto">
                 ${post.status}
-              </span>
+              </p>
             </td>
             <td class="px-6 py-4">${post.views}</td>  
             <td class="px-6 py-4">${post.created_at.split(" ")[0]}</td>
