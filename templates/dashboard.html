@@ -81,12 +81,14 @@
     <!-- Modal Add/Edit Post -->
     {% include 'partials/post_modal_add.html' %}
 
+    <script src="{{ url_for('static', filename='js/api/postApi.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api/userApi.js') }}"></script>
     <script src="{{ url_for('static', filename='js/api.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/form.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/postTable.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/userTable.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/homePosts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/page/postDashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/controller/postController.js') }}"></script>
   </body>
 </html>

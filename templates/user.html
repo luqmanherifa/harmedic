@@ -77,12 +77,14 @@
 
     <input type="hidden" id="currentUserId" value="{{ session.user_id }}" />
 
+    <script src="{{ url_for('static', filename='js/api/postApi.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api/userApi.js') }}"></script>
     <script src="{{ url_for('static', filename='js/api.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/form.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/postTable.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/userTable.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/homePosts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/page/userDashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/controller/userController.js') }}"></script>
   </body>
 </html>

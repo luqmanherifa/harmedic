@@ -76,12 +76,14 @@
     <!-- Footer -->
     {% include 'partials/footer.html' %}
 
+    <script src="{{ url_for('static', filename='js/api/postApi.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api/userApi.js') }}"></script>
     <script src="{{ url_for('static', filename='js/api.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/form.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/postTable.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/userTable.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom/homePosts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dom.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/page/homePage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/controller/homeController.js') }}"></script>
   </body>
 </html>
