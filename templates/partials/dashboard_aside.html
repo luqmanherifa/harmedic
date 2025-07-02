@@ -10,10 +10,10 @@
       <li>
         <a
           href="{{ url_for('pages.dashboard') }}"
-          class="flex items-center p-2 rounded-lg hover:bg-gray-100 {% if request.path == url_for('pages.dashboard') %}text-blue-600 font-semibold{% else %}text-gray-600{% endif %}"
+          class="flex items-center p-2 rounded-lg {% if request.path == url_for('pages.dashboard') %} bg-blue-100 text-blue-600 font-semibold {% else %} hover:bg-gray-100 text-gray-600 {% endif %}"
         >
           <svg
-            class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('pages.dashboard') %}text-blue-600{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
+            class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('pages.dashboard') %} text-blue-600 {% else %} text-gray-500 group-hover:text-gray-900 {% endif %}"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -37,10 +37,10 @@
       <li>
         <a
           href="{{ url_for('pages.user') }}"
-          class="flex items-center p-2 rounded-lg hover:bg-gray-100 {% if request.path == url_for('pages.user') %}text-blue-600 font-semibold{% else %}text-gray-600{% endif %}"
+          class="flex items-center p-2 rounded-lg {% if request.path == url_for('pages.user') %} bg-blue-100 text-blue-600 font-semibold {% else %} hover:bg-gray-100 text-gray-600 {% endif %}"
         >
           <svg
-            class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('pages.user') %}text-blue-600{% else %}text-gray-500 group-hover:text-gray-900{% endif %}"
+            class="w-4 h-4 ml-2 transition duration-75 {% if request.path == url_for('pages.user') %} text-blue-600 {% else %} text-gray-500 group-hover:text-gray-900 {% endif %}"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"

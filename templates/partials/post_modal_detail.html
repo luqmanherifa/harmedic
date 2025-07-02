@@ -4,7 +4,7 @@
   aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-40"
 >
-  <div class="relative p-4 w-full max-w-md max-h-full">
+  <div class="relative p-4 w-full max-w-xl max-h-full">
     <div class="relative bg-white rounded-lg shadow-sm">
       <div
         class="flex items-center justify-between p-4 md:p-5 border-b border-gray-300 rounded-t"
@@ -48,12 +48,12 @@
           <span>:</span>
           <span id="detailAuthor"></span>
         </div>
-
-        <div class="pt-0">
-          <p><strong>Image</strong></p>
+        <div class="grid grid-cols-[100px_10px_1fr]">
+          <strong>Image</strong>
+          <span>:</span>
           <img
             id="detailImage"
-            class="w-[200px] h-[150px] object-cover rounded pt-3"
+            class="w-[200px] h-[150px] object-cover pt-1"
             src=""
             alt="Post Image"
             onerror="this.onerror=null; this.src='/static/images/harmedic.png';"
