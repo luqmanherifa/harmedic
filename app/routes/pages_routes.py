@@ -25,8 +25,17 @@ def post_detail(id):
     if 'user' in session:
         post.views += 1
         db.session.commit()
-        
-    return render_template('post_detail.html', post=post)
+
+    # Get other related posts
+    related_posts = (
+        Post.query
+        .filter(Post.id != id, Post.status == 'approved')
+        .order_by(Post.created_at.desc())
+        .limit(2)
+        .all()
+    )
+
+    return render_template('post_detail.html', post=post, related_posts=related_posts)
 
 @pages.route('/search_home_posts')
 def search_home_posts():
