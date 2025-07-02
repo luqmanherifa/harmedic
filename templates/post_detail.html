@@ -87,11 +87,11 @@
           class="max-w-xs p-6 bg-blue-50 border border-blue-300 bg-blue-50 rounded-lg"
         >
           <a href="#">
-            <h5 class="mb-2 text-xl font-bold tracking-tight text-blue-800">
+            <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-800">
               Need a Health Checkup?
             </h5>
           </a>
-          <p class="mb-3 font-normal text-blue-600">
+          <p class="mb-3 font-normal text-gray-600">
             Visit Harmedic Hospital for trusted medical care. You can view
             directions, check service hours, and read patient feedback all in
             one convenient place.
@@ -121,6 +121,7 @@
         </div>
 
         <!-- Related Posts -->
+        {% if related_posts %}
         <div class="mt-7 mb-4 flex items-center justify-between">
           <h4 class="text-base font-semibold text-gray-600">Other Posts</h4>
           <a
@@ -155,6 +156,7 @@
           </a>
           {% endfor %}
         </div>
+        {% endif %}
       </div>
     </div>
 

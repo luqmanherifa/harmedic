@@ -34,13 +34,13 @@
     {% include 'partials/jumbotron.html' %}
 
     <!-- Posts -->
-    <div class="bg-white pt-5 min-h-screen">
-      <div class="mx-auto max-w-7xl relative z-10">
+    <div class="bg-white pt-1 min-h-screen">
+      <div class="mx-auto max-w-7xl relative z-10 mt-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {% for post in posts %}
           <a
             href="{{ url_for('pages.post_detail', id=post.id) }}"
-            class="group cursor-pointer rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition-all"
+            class="group cursor-pointer rounded-lg border border-gray-300 bg-white hover:bg-gray-100 transition-all"
           >
             <img
               class="w-[410px] h-[308px] object-cover rounded-b-none rounded-t-lg"
@@ -50,11 +50,11 @@
             />
             <div class="p-5">
               <h2
-                class="line-clamp-1 text-lg font-semibold text-gray-600 group-hover:text-blue-800"
+                class="bricolage line-clamp-1 text-lg font-semibold text-gray-600 group-hover:text-blue-900"
               >
                 {{ post.title }}
               </h2>
-              <p class="mt-2 text-xs font-normal text-gray-600">
+              <p class="mt-2 text-xs font-normal text-gray-400">
                 <span class="text-gray-400 flex items-center text-sm">
                   <span>{{ post.author.username }}</span>
                   <span class="mx-2">•</span>
@@ -63,7 +63,7 @@
                   <span>{{ post.views }} views</span>
                 </span>
               </p>
-              <p class="mt-2 line-clamp-3 text-base font-normal text-gray-600">
+              <p class="mt-2 line-clamp-3 text-base font-normal text-gray-500">
                 {{ post.content }}
               </p>
             </div>
@@ -71,6 +71,34 @@
           {% endfor %}
         </div>
       </div>
+
+      <!-- Top Authors -->
+      {% if top_authors|length > 0 %}
+      <div class="w-full flex justify-center bg-white mt-12">
+        <div>
+          <h2
+            class="text-xl font-semibold text-gray-600 bricolage mb-6 text-center"
+          >
+            Top Authors
+          </h2>
+          <ul class="flex flex-wrap gap-6 justify-center">
+            {% for author, views in top_authors %}
+            <li class="flex flex-col items-center justify-start px-1.5 py-1">
+              <div
+                class="bg-blue-50 w-20 h-20 rounded-full flex items-center justify-center text-blue-800 font-bold text-2xl border border-blue-300"
+              >
+                {{ author.username[0]|upper }}
+              </div>
+              <p class="mt-3 text-center text-lg font-normal text-gray-600">
+                {{ author.username }}
+              </p>
+              <p class="text-sm text-gray-500 mt-1">{{ views }} views</p>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
     </div>
 
     <!-- Footer -->

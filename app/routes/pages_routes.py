@@ -3,7 +3,8 @@ import os
 from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
 
 from app import db
-from app.models import Post
+from sqlalchemy import func
+from app.models import Post, User
 
 pages = Blueprint(
     'pages',
@@ -15,7 +16,18 @@ pages = Blueprint(
 @pages.route('/')
 def home():
     posts = Post.query.filter_by(status='approved').all()
-    return render_template('home.html', posts=posts)
+
+    # Fetch authors with views
+    top_authors = (
+        db.session.query(User, func.coalesce(func.sum(Post.views), 0).label('total_views'))
+        .outerjoin(Post, Post.author_id == User.id)
+        .filter(User.role.in_(['author', 'admin']))
+        .group_by(User.id)
+        .order_by(func.sum(Post.views).desc())
+        .all()
+    )
+
+    return render_template('home.html', posts=posts, top_authors=top_authors)
 
 @pages.route('/post/<int:id>')
 def post_detail(id):
